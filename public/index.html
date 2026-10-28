@@ -12,7 +12,7 @@
 /* Layout: one sticky "carbon line" (brand, views, quick-add) over a single left-aligned column of view content, max 1080px. */
 :root{
   --paper:#F1F2EE; --sheet:#FFFFFF; --ink:#1D2433; --ink-2:#4A5160; --ink-3:#686E7A;
-  --rule:#D8DBD4; --carbon:#3341B5; --carbon-wash:#E4E7F8; --due:#9A5B00; --due-wash:#F7ECD9; --stop:#B3261E;
+  --rule:#D8DBD4; --carbon:#3341B5; --carbon-wash:#E4E7F8; --due:#9A5B00; --due-wash:#F7ECD9; --stop:#B3261E; --gain:#276B43; --gain-wash:#DDEFE3;
   --display:"Bricolage Grotesque", "Avenir Next Condensed", "Arial Narrow", system-ui, sans-serif;
   --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --s-1:.8125rem; --s0:1rem; --s1:1.1875rem; --s2:1.5rem; --s3:2.125rem; --s4:3rem;
@@ -20,12 +20,12 @@
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --paper:#151922; --sheet:#1C212C; --ink:#E7E9E3; --ink-2:#A1A8B4; --ink-3:#8A92A0;
-  --rule:#2D3341; --carbon:#97A2FF; --carbon-wash:#262C4D; --due:#F0B04A; --due-wash:#3A2E18; --stop:#FF8F86;
+  --rule:#2D3341; --carbon:#97A2FF; --carbon-wash:#262C4D; --due:#F0B04A; --due-wash:#3A2E18; --stop:#FF8F86; --gain:#74D39E; --gain-wash:#1D3327;
   color-scheme:dark;
 }}
 :root[data-theme="dark"]{
   --paper:#151922; --sheet:#1C212C; --ink:#E7E9E3; --ink-2:#A1A8B4; --ink-3:#8A92A0;
-  --rule:#2D3341; --carbon:#97A2FF; --carbon-wash:#262C4D; --due:#F0B04A; --due-wash:#3A2E18; --stop:#FF8F86;
+  --rule:#2D3341; --carbon:#97A2FF; --carbon-wash:#262C4D; --due:#F0B04A; --due-wash:#3A2E18; --stop:#FF8F86; --gain:#74D39E; --gain-wash:#1D3327;
   color-scheme:dark;
 }
 :root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -67,6 +67,7 @@ nav.views a[aria-current="page"]{background:var(--ink);color:var(--paper)}
 .reading{min-height:30px;margin-top:8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:var(--s-1);color:var(--ink-2)}
 .chip{display:inline-flex;align-items:center;gap:6px;padding:2px 10px;border-radius:999px;background:var(--carbon-wash);color:var(--carbon);white-space:nowrap}
 .chip.kind-sub{background:var(--carbon);color:var(--sheet)}
+.chip.kind-in{background:var(--gain);color:var(--sheet)}
 .chip.miss{background:transparent;border:1px dashed var(--ink-3);color:var(--ink-3)}
 .swatch{width:8px;height:8px;border-radius:2px;display:inline-block;flex:none}
 .hint{color:var(--ink-3)}
@@ -87,6 +88,7 @@ h2{font-family:var(--display);font-weight:600;font-variation-settings:"wdth" 85;
 .legend .key-paid{color:var(--carbon)}
 .legend .key-todo{color:var(--due)}
 .legend .key-late{color:var(--stop)}
+.legend .key-in{color:var(--gain)}
 .monthnav{display:flex;align-items:center;gap:6px;color:var(--ink-2);font-size:var(--s-1)}
 .monthnav button{background:none;border:1px solid var(--rule);border-radius:999px;width:30px;height:30px;cursor:pointer;color:var(--ink-2);line-height:1}
 .monthnav button:hover{color:var(--ink);border-color:var(--ink-3)}
@@ -154,6 +156,8 @@ h2{font-family:var(--display);font-weight:600;font-variation-settings:"wdth" 85;
 .cal .sb.todo{color:var(--due)}
 .cal .sb.late{color:var(--stop)}
 .tag-sub{display:inline-block;font-size:.75rem;padding:0 6px;border-radius:4px;background:var(--carbon-wash);color:var(--carbon);margin-left:6px;vertical-align:1px}
+.tag-sub.in{background:var(--gain-wash);color:var(--gain)}
+.rows li .amt.in{color:var(--gain)}
 
 .empty{padding:28px;border:1px dashed var(--rule);border-radius:12px;color:var(--ink-2);max-width:56ch}
 .empty strong{display:block;color:var(--ink);font-family:var(--display);font-weight:600;font-size:var(--s1);margin-bottom:4px}
@@ -206,6 +210,7 @@ table.subs tr.off td{color:var(--ink-3)}
 .cal .cell.future .tot{color:var(--ink-3)}
 .cal .sb{font-size:.75rem;line-height:1.3;color:var(--carbon);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cal .cell.future .sb{color:var(--due)}
+.cal .inc{font-size:.75rem;line-height:1.3;color:var(--gain);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cal .wk{border-bottom:1px solid var(--rule);padding:6px;text-align:right;font-size:var(--s-1);color:var(--ink-2);display:flex;flex-direction:column;justify-content:flex-start}
 @media (max-width:640px){
   .cal{grid-template-columns:repeat(7,minmax(0,1fr))}
@@ -308,7 +313,7 @@ dialog::backdrop{background:rgba(15,20,35,.42)}
     </div>
     <form class="capture" id="capture" autocomplete="off">
       <div class="line">
-        <label for="q">Add an expense or subscription</label>
+        <label for="q">Add an expense, subscription or income</label>
         <textarea id="q" rows="1" placeholder="lunch 12.50 yesterday, or spotify 11.99 monthly" spellcheck="false"></textarea>
         <select id="qcur" aria-label="Currency for new entries" title="Currency for new entries. Typing a code like cop or ₽ overrides it for one entry."></select>
         <button class="go" id="addBtn" type="submit" disabled>Add</button>
@@ -333,24 +338,29 @@ dialog::backdrop{background:rgba(15,20,35,.42)}
     <div class="seg" role="group" aria-label="Kind">
       <button type="button" data-kind="once" aria-pressed="true">One-off</button>
       <button type="button" data-kind="sub" aria-pressed="false">Recurring</button>
+      <button type="button" data-kind="income" aria-pressed="false">Income</button>
     </div>
     <div class="grid2">
       <div class="field"><label for="f-label">Name</label><input id="f-label" required placeholder="Groceries, Netflix…"></div>
       <div class="field"><label for="f-amount">Amount</label><div style="display:flex;gap:6px"><input id="f-amount" inputmode="decimal" placeholder="0.00" style="min-width:0"><select id="f-cur" aria-label="Currency" style="width:auto"></select></div></div>
     </div>
     <div class="grid2">
-      <div class="field"><label for="f-cat">Category</label><select id="f-cat"></select></div>
+      <div class="field" data-only="once sub"><label for="f-cat">Category</label><select id="f-cat"></select></div>
+      <div class="field" data-only="income"><label for="f-repeat">Repeats</label>
+        <select id="f-repeat"><option value="once">Just once</option><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option><option value="quarterly">Every 3 months</option><option value="yearly">Yearly</option></select></div>
       <div class="field"><label for="f-date" id="f-date-lab">Date</label><input id="f-date" type="date"></div>
     </div>
+    <div class="field" id="f-until-row" hidden><label for="f-until">Last arrives, optional</label><input id="f-until" type="date">
+      <p class="quiet">Leave empty while it keeps coming.</p></div>
     <div class="field" id="f-newcat-wrap" hidden><label for="f-newcat">New category name</label><input id="f-newcat" placeholder="Domains, Pets…"></div>
     <div class="grid2" id="f-price-row" hidden>
-      <div class="field"><label for="f-why">This new price is</label>
-        <select id="f-why"><option value="change">A price change</option><option value="fix">A correction, the current price was wrong</option></select></div>
-      <div class="field" id="f-from-wrap"><label for="f-from">New price from</label><input id="f-from" type="date"></div>
+      <div class="field"><label for="f-why" id="f-why-lab">This new price is</label>
+        <select id="f-why"><option value="change" id="f-why-change">A price change</option><option value="fix">A correction, the current price was wrong</option></select></div>
+      <div class="field" id="f-from-wrap"><label for="f-from" id="f-from-lab">New price from</label><input id="f-from" type="date"></div>
     </div>
     <div class="grid2" data-only="sub">
       <div class="field"><label for="f-cycle">Billed</label>
-        <select id="f-cycle"><option value="weekly">Weekly</option><option value="monthly" selected>Monthly</option><option value="quarterly">Every 3 months</option><option value="yearly">Yearly</option></select></div>
+        <select id="f-cycle"><option value="daily">Daily</option><option value="weekly">Weekly</option><option value="monthly" selected>Monthly</option><option value="quarterly">Every 3 months</option><option value="yearly">Yearly</option></select></div>
       <div class="field"><label for="f-status">Status</label>
         <select id="f-status"><option value="active">Active</option><option value="paused">Paused</option><option value="cancelled">Cancelled</option></select></div>
     </div>
@@ -426,7 +436,7 @@ dialog::backdrop{background:rgba(15,20,35,.42)}
 
 <div class="toast" id="toast" role="status"><span id="toastMsg"></span><button type="button" id="toastUndo" hidden>Undo</button></div>
 <div class="tip" id="tip" aria-hidden="true" hidden></div>
-<button class="fab" id="fab" type="button" aria-label="Add an expense or subscription" hidden>+</button>
+<button class="fab" id="fab" type="button" aria-label="Add an expense, subscription or income" hidden>+</button>
 
 <script>
 (() => {
@@ -477,13 +487,13 @@ function catId(name) {
   for (let n = 2; taken(id); n++) id = `${base}-${n}`;
   return id;
 }
-const CYCLE_NAME = {weekly:'week', monthly:'month', quarterly:'3 months', yearly:'year'};
-const CYCLE_ADJ = {weekly:'Weekly', monthly:'Monthly', quarterly:'Quarterly', yearly:'Yearly'};
-const PER_MONTH = {weekly:52/12, monthly:1, quarterly:1/3, yearly:1/12};
+const CYCLE_NAME = {daily:'day', weekly:'week', monthly:'month', quarterly:'3 months', yearly:'year'};
+const CYCLE_ADJ = {daily:'Daily', weekly:'Weekly', monthly:'Monthly', quarterly:'Quarterly', yearly:'Yearly'};
+const PER_MONTH = {daily:365/12, weekly:52/12, monthly:1, quarterly:1/3, yearly:1/12};
 
 /* ---------- state ---------- */
 const S = {
-  expenses: [], subs: [], settings: {currency:'USD', budgetSubs:0, budgetOnce:0, hourly:0},
+  expenses: [], subs: [], incomes: [], settings: {currency:'USD', budgetSubs:0, budgetOnce:0, hourly:0},
   ready: false, mode: 'loading',
   view: 'ledger', month: today(), calSel: null, scrollDay: false,
   filter: null,
@@ -531,12 +541,21 @@ const moneyIn = (n, cur) => { cur = cur || dispCur(); if (!fmtIn[cur]) { try { f
 const origNote = (raw, cur) => cur && cur !== dispCur() ? `<small>${esc(moneyIn(raw, cur))}</small>` : '';
 
 /* ---------- subscription math ---------- */
+const CYCLE_DAYS = {daily:1, weekly:7};
 function nthCharge(sub, start, k) {
-  if (sub.cycle === 'weekly') return addDays(start, 7*k);
+  if (CYCLE_DAYS[sub.cycle]) return addDays(start, CYCLE_DAYS[sub.cycle]*k);
   const step = sub.cycle === 'quarterly' ? 3 : sub.cycle === 'yearly' ? 12 : 1;
   const mi = start.getMonth() + step*k;
   const y = start.getFullYear() + Math.floor(mi/12), m = ((mi%12)+12)%12;
   return new Date(y, m, Math.min(start.getDate(), dim(y, m)));
+}
+// The charge just before `from`, so walking a range doesn't start from the very first charge.
+function firstK(sub, start, from) {
+  if (from <= start) return 0;
+  if (CYCLE_DAYS[sub.cycle]) return Math.max(0, Math.floor(daysBetween(start, from)/CYCLE_DAYS[sub.cycle]) - 1);
+  const step = sub.cycle === 'quarterly' ? 3 : sub.cycle === 'yearly' ? 12 : 1;
+  const months = (from.getFullYear()-start.getFullYear())*12 + from.getMonth()-start.getMonth();
+  return Math.max(0, Math.floor(months/step) - 1);
 }
 function stopDate(sub) {
   if (sub.status === 'cancelled' || sub.status === 'paused') return sub.endedOn ? fromISO(sub.endedOn) : addDays(today(), -1);
@@ -563,13 +582,7 @@ function charges(sub, from, to) {
   const stop = stopDate(sub);
   const end = stop && stop < to ? stop : to;
   const out = [];
-  let k = 0;
-  if (sub.cycle === 'weekly' && from > start) k = Math.max(0, Math.floor(daysBetween(start, from)/7) - 1);
-  else if (from > start) {
-    const step = sub.cycle === 'quarterly' ? 3 : sub.cycle === 'yearly' ? 12 : 1;
-    const months = (from.getFullYear()-start.getFullYear())*12 + from.getMonth()-start.getMonth();
-    k = Math.max(0, Math.floor(months/step) - 1);
-  }
+  let k = firstK(sub, start, from);
   for (let d = nthCharge(sub, start, k); d <= end && k < 5000; d = nthCharge(sub, start, ++k)) {
     if (d >= from) { const ds = iso(d); const st = payState(sub, ds); const raw = st.amount > 0 ? st.amount : priceAt(sub, ds); out.push({date: ds, raw, cur: curOf(sub), amount: conv(raw, curOf(sub), st.paidOn || ds), sub, paid: st.paid, paidOn: st.paidOn || null, overdue: !!st.overdue, ahead: !!(st.paid && st.paidOn && st.paidOn < ds)}); }
   }
@@ -601,8 +614,32 @@ function movements(from, to, {includeFuture = true} = {}) {
     if (!includeFuture && !c.paid) continue;
     out.push({id:s.id+'@'+c.date, kind:'sub', date:eff, due:c.date, raw:c.raw, cur:c.cur, amount:c.amount, label:s.name, category:s.category, future:!c.paid, overdue:c.overdue, ahead:c.ahead, ref:s});
   }
-  return out.sort((a,b) => a.date < b.date ? 1 : a.date > b.date ? -1 : 0);
+  return out.sort(newestFirst);
 }
+const newestFirst = (a,b) => a.date < b.date ? 1 : a.date > b.date ? -1 : 0;
+/* Income arrives on its date, or on every date of its cycle until its last one. It's counted apart from spending. */
+function incomeDates(inc, from, to) {
+  if (!inc.date) return [];
+  const start = fromISO(inc.date);
+  if (!inc.cycle) return start >= from && start <= to ? [inc.date] : [];
+  const stop = inc.endedOn ? fromISO(inc.endedOn) : null, end = stop && stop < to ? stop : to;
+  const out = [];
+  for (let k = firstK(inc, start, from), d = nthCharge(inc, start, k), n = 0; d <= end && n < 5000; d = nthCharge(inc, start, ++k), n++) if (d >= from) out.push(iso(d));
+  return out;
+}
+function incomeMoves(from, to) {
+  const now = iso(today()), out = [];
+  for (const inc of S.incomes) for (const ds of incomeDates(inc, from, to)) {
+    const raw = priceAt(inc, ds);
+    out.push({id:inc.id+'@'+ds, kind:'income', date:ds, raw, cur:curOf(inc), amount:conv(raw, curOf(inc), ds), label:inc.label, note:inc.note, future:ds > now, ref:inc});
+  }
+  return out.sort(newestFirst);
+}
+const regularIncome = () => S.incomes.filter(i => i.cycle && i.date <= iso(today()) && !(i.endedOn < iso(today()))).reduce((a, i) => a + conv(priceAt(i, iso(today())), curOf(i)) * (PER_MONTH[i.cycle] || 1), 0);
+const incomeMeta = x => x.ref.cycle ? `${CYCLE_ADJ[x.ref.cycle]} income` : 'Income';
+const incomeTag = x => x.future ? `<span class="tag-sub in">expected</span>` : '';
+const spentOf = l => sum(l.filter(x => x.kind !== 'income'));
+const cameIn = l => sum(l.filter(x => x.kind === 'income'));
 function subTag(x) {
   if (x.overdue) return `<span class="tag-sub late">overdue since ${fmtDay(x.due)}</span>`;
   if (x.future) return `<span class="tag-sub todo">to pay</span>`;
@@ -613,7 +650,9 @@ const sum = arr => arr.reduce((a,b) => a + b.amount, 0);
 
 /* ---------- quick-add parser ---------- */
 const CYCLE_RX = [
-  ['weekly', /(?:^|\s)(weekly|every\s+week|per\s+week|a\s+week|\/\s?w(?:ee)?k|\/w|semanal)(?=\s|$|[.,])/i],
+  // "every friday" takes only "every", so the weekday stays behind as the first date.
+  ['daily', /(?:^|\s)(daily|every\s?day|each\s+day|per\s+day|a\s+day|\/\s?day|\/d|diario|cada\s+d[ií]a)(?=\s|$|[.,])/i],
+  ['weekly', /(?:^|\s)(weekly|(?:every|each)\s+week|per\s+week|a\s+week|cada\s+semana|\/\s?w(?:ee)?k|\/w|semanal|(?:every|each)(?=\s+(?:mon|tue|wed|thu|fri|sat|sun)[a-z]*(?:\s|$)))(?=\s|$|[.,])/i],
   ['quarterly', /(?:^|\s)(quarterly|every\s+(?:3|three)\s+months|every\s+quarter|per\s+quarter|\/q(?:tr)?|trimestral)(?=\s|$|[.,])/i],
   ['yearly', /(?:^|\s)(yearly|annual(?:ly)?|every\s+year|per\s+year|a\s+year|\/\s?y(?:ea)?r|\/y|anual)(?=\s|$|[.,])/i],
   ['monthly', /(?:^|\s)(monthly|every\s+month|per\s+month|a\s+month|\/\s?mo(?:nth)?|\/m|mensual|sub(?:scription)?)(?=\s|$|[.,])/i],
@@ -668,14 +707,15 @@ function guessCategory(text) {
   }
   return best;
 }
+// Codes count only between letter boundaries, so "1000rub" and "cop1000" are read like "1000 rub".
 function detectCur(t) {
   t = t.toLowerCase();
-  if (/₽|руб|рубл|\brub|rubles|roubles/.test(t)) return 'RUB';
-  if (/€|\beur|euros/.test(t)) return 'EUR';
-  if (/£|\bgbp/.test(t)) return 'GBP';
-  if (/s\/|\bpen\b|soles/.test(t)) return 'PEN';
-  if (/\breais|\bbrl|r\$/.test(t)) return 'BRL';
-  for (const c of CURRENCIES) if (new RegExp('\\b' + c.toLowerCase() + '\\b').test(t)) return c;
+  if (/₽|руб|рубл|(?<![a-z])rub(?![a-z])|rubles|roubles/.test(t)) return 'RUB';
+  if (/€|(?<![a-z])eur(?![a-z])|euros/.test(t)) return 'EUR';
+  if (/£|(?<![a-z])gbp(?![a-z])/.test(t)) return 'GBP';
+  if (/s\/|(?<![a-z])pen(?![a-z])|soles/.test(t)) return 'PEN';
+  if (/(?<![a-z])reais|(?<![a-z])brl(?![a-z])|r\$/.test(t)) return 'BRL';
+  for (const c of CURRENCIES) if (new RegExp('(?<![a-z])' + c.toLowerCase() + '(?![a-z])').test(t)) return c;
   if (/usd|dollars|bucks/.test(t)) return 'USD';
   return null;
 }
@@ -712,8 +752,12 @@ function parseLine(raw) {
   // cycle
   for (const [c, rx] of CYCLE_RX) { const m = s.match(rx); if (m) { r.cycle = c; r.kind = 'sub'; s = s.replace(m[0], ' '); break; } }
   if (r.trial) { r.kind = 'sub'; r.cycle = r.cycle || 'monthly'; }
-  // date
-  if (!r.date) { const d = takeDate(s, r.trial); if (d.date) { r.date = d.date; r.dateText = d.text; s = d.rest; } }
+  // money coming in: a "+" before the amount, or a word like salary; the word stays in the name
+  const plus = s.match(/(?:^|\s)\+(?=\s?(?:[\d$€£₽]|r\$|s\/|(?:usd|eur|clp|cop|gbp|mxn|rub|ars|pen|brl|cad|aud|jpy|chf|cny|kzt)\s?\d))/i);
+  if (plus) s = s.replace(plus[0], ' ');
+  if (plus || /(?:^|\s)(income|salary|paycheck|payday|sueldo|salario|ingresos?|зарплата)(?=\s|$|[.,])/i.test(s)) { r.kind = 'income'; r.trial = false; delete r.pay; delete r.newCat; }
+  // date; income and trials may be ahead of today
+  if (!r.date) { const d = takeDate(s, r.trial || r.kind === 'income'); if (d.date) { r.date = d.date; r.dateText = d.text; s = d.rest; } }
   // amount: prefer currency-marked or decimal numbers
   const amtRx = [
     /(?:^|\s)(?:[$€£₽]|r\$|s\/|usd|eur|clp|cop|gbp|mxn|rub|ars|pen|brl|cad|aud|jpy|chf|cny|kzt)\s?(\d[\d.,]*)(?=\s|$)/i,
@@ -728,13 +772,15 @@ function parseLine(raw) {
   // filler words
   s = s.replace(/(?:^|\s)(for|at|on|in|from|the|a|an|starting|starts|en|de|para)(?=\s)/gi, ' ').replace(/\s+/g, ' ').trim();
   r.label = s ? s.charAt(0).toUpperCase() + s.slice(1) : '';
-  if (!r.category) r.category = guessCategory(raw) || null;
+  if (r.kind === 'income') { r.category = null; if (!r.label) r.label = 'Income'; }
+  else if (!r.category) r.category = guessCategory(raw) || null;
   if (!r.label && r.category) r.label = catOf(r.category).name;
   if (!r.date) r.date = today();
   return r;
 }
 const validParse = p => p && p.amount > 0 && p.label;
 const catName = p => p.newCat ? p.newCat.name : p.category ? catOf(p.category).name : 'Other';
+const kindName = p => p.kind === 'income' ? (p.cycle ? `${CYCLE_ADJ[p.cycle]} income` : 'Income') : p.kind === 'sub' ? CYCLE_ADJ[p.cycle] : 'One-off';
 
 /* ---------- storage ---------- */
 // The server applies each change and answers with the whole ledger; the page only ever shows what it returns.
@@ -743,7 +789,7 @@ let rev = -1;
 function apply(l) {
   if ((l.rev ?? 0) < rev) return; // an older response finished after a newer one
   rev = l.rev ?? 0;
-  S.expenses = l.expenses || []; S.subs = l.subs || []; S.settings = {...BASE_SETTINGS, ...(l.settings||{})};
+  S.expenses = l.expenses || []; S.subs = l.subs || []; S.incomes = l.incomes || []; S.settings = {...BASE_SETTINGS, ...(l.settings||{})};
   fmtCache = {}; render();
 }
 const Store = {
@@ -790,15 +836,15 @@ const q = $('#q');
 let parsed = [];
 function autosize() { q.style.height = 'auto'; q.style.height = q.scrollHeight + 'px'; }
 function chipFor(p) {
-  const c = p.category ? catOf(p.category) : null;
+  const c = p.category ? catOf(p.category) : null, inc = p.kind === 'income';
   const bits = [];
-  bits.push(`<span class="chip ${p.kind==='sub'?'kind-sub':''}">${p.kind==='sub' ? (p.trial ? 'Trial, then ' + CYCLE_ADJ[p.cycle].toLowerCase() : CYCLE_ADJ[p.cycle]) : 'One-off'}</span>`);
+  bits.push(`<span class="chip ${p.kind==='sub'?'kind-sub':inc?'kind-in':''}">${p.kind==='sub' ? (p.trial ? 'Trial, then ' + CYCLE_ADJ[p.cycle].toLowerCase() : CYCLE_ADJ[p.cycle]) : kindName(p)}</span>`);
   if (p.kind === 'sub') bits.push(`<span class="chip">${p.pay === 'manual' ? 'you pay it yourself' : 'charged automatically'}</span>`);
-  bits.push(p.amount > 0 ? `<span class="chip num">${moneyIn(p.amount, p.cur)}${p.cur !== dispCur() ? ` ≈ ${money(conv(p.amount, p.cur))}` : ''}</span>` : `<span class="chip miss">amount?</span>`);
+  bits.push(p.amount > 0 ? `<span class="chip num">${inc ? '+' : ''}${moneyIn(p.amount, p.cur)}${p.cur !== dispCur() ? ` ≈ ${money(conv(p.amount, p.cur))}` : ''}</span>` : `<span class="chip miss">amount?</span>`);
   bits.push(p.label ? `<span class="chip">${esc(p.label)}</span>` : `<span class="chip miss">name?</span>`);
-  bits.push(p.newCat ? `<span class="chip">new category: ${esc(p.newCat.name)}</span>` : c ? `<span class="chip">${esc(c.name)}</span>` : `<span class="chip miss">category: Other</span>`);
+  if (!inc) bits.push(p.newCat ? `<span class="chip">new category: ${esc(p.newCat.name)}</span>` : c ? `<span class="chip">${esc(c.name)}</span>` : `<span class="chip miss">category: Other</span>`);
   const ds = iso(p.date);
-  bits.push(`<span class="chip">${p.kind==='sub' ? (p.trial ? 'first charge ' : 'bills from ') : ''}${ds === iso(today()) ? 'today' : ds === iso(addDays(today(),-1)) ? 'yesterday' : fmtLong(ds)}</span>`);
+  bits.push(`<span class="chip">${p.kind==='sub' ? (p.trial ? 'first charge ' : 'bills from ') : inc && p.cycle ? 'from ' : inc && ds > iso(today()) ? 'expected ' : ''}${ds === iso(today()) ? 'today' : ds === iso(addDays(today(),-1)) ? 'yesterday' : fmtLong(ds)}</span>`);
   return bits.join('');
 }
 function updateReading() {
@@ -807,14 +853,14 @@ function updateReading() {
   parsed = lines.map(parseLine);
   const box = $('#reading');
   if (!lines.length) {
-    box.innerHTML = `<span class="hint">Type a name, an amount and optionally when. Add <b>monthly</b> or <b>yearly</b> for subscriptions, plus <b>manual</b> if you pay it yourself. <b>#tag</b> sets a category. Paste several lines to add them all. Press <kbd>/</kbd> to jump here.</span>`;
+    box.innerHTML = `<span class="hint">Type a name, an amount and optionally when. Add <b>daily</b>, <b>weekly</b>, <b>monthly</b> or <b>yearly</b> for subscriptions, plus <b>manual</b> if you pay it yourself. Put <b>+</b> in front for income, like <b>+2400 salary monthly</b>. <b>#tag</b> sets a category. Paste several lines to add them all. Press <kbd>/</kbd> to jump here.</span>`;
     $('#addBtn').disabled = true; $('#addBtn').textContent = 'Add'; return;
   }
   if (parsed.length === 1) {
     box.innerHTML = chipFor(parsed[0]);
   } else {
     const ok = parsed.filter(validParse).length;
-    box.innerHTML = `<table class="batch num"><tbody>${parsed.map(p => `<tr><td>${validParse(p) ? '' : '<span class="chip miss">skip</span>'}</td><td>${esc(p.label||'?')}</td><td>${p.amount>0?moneyIn(p.amount, p.cur):'?'}</td><td>${p.kind==='sub'?CYCLE_ADJ[p.cycle]:'One-off'}</td><td>${esc(catName(p))}</td><td>${fmtDay(iso(p.date))}</td></tr>`).join('')}</tbody></table><span class="hint">${ok} of ${parsed.length} lines ready.</span>`;
+    box.innerHTML = `<table class="batch num"><tbody>${parsed.map(p => `<tr><td>${validParse(p) ? '' : '<span class="chip miss">skip</span>'}</td><td>${esc(p.label||'?')}</td><td>${p.amount>0?(p.kind==='income'?'+':'')+moneyIn(p.amount, p.cur):'?'}</td><td>${kindName(p)}</td><td>${p.kind==='income'?'':esc(catName(p))}</td><td>${fmtDay(iso(p.date))}</td></tr>`).join('')}</tbody></table><span class="hint">${ok} of ${parsed.length} lines ready.</span>`;
   }
   const ok = parsed.filter(validParse).length;
   $('#addBtn').disabled = ok === 0 || S.mode === 'readonly';
@@ -823,6 +869,7 @@ function updateReading() {
 function recordFromParse(p) {
   const now = new Date().toISOString();
   if (p.kind === 'sub') return ['subs', {name:p.label, amount:round(p.amount, p.cur), cur:p.cur, cycle:p.cycle||'monthly', category:p.category||'other', start:iso(p.date), status:'active', trial:!!p.trial, pay:p.pay||'auto', payments:{}, note:p.note||'', reviewedOn:iso(today()), history:[], createdAt:now}];
+  if (p.kind === 'income') return ['incomes', {label:p.label, amount:round(p.amount, p.cur), cur:p.cur, date:iso(p.date), ...(p.cycle ? {cycle:p.cycle} : {}), history:[], note:p.note||'', createdAt:now}];
   return ['expenses', {label:p.label, amount:round(p.amount, p.cur), cur:p.cur, category:p.category||'other', date:iso(p.date), note:p.note||'', createdAt:now}];
 }
 async function commitParsed() {
@@ -836,7 +883,7 @@ async function commitParsed() {
   } catch (e) { toast(dbMessage(e)); return; }
   q.value = ''; updateReading();
   const first = made[0][2];
-  const msg = made.length > 1 ? `Added ${made.length} entries` : made[0][0] === 'subs' ? `Added ${first.name}, ${moneyIn(first.amount, first.cur)} a ${CYCLE_NAME[first.cycle]}` : `Added ${first.label}, ${moneyIn(first.amount, first.cur)}`;
+  const msg = made.length > 1 ? `Added ${made.length} entries` : made[0][0] === 'subs' ? `Added ${first.name}, ${moneyIn(first.amount, first.cur)} a ${CYCLE_NAME[first.cycle]}` : made[0][0] === 'incomes' ? `Added ${first.label}, +${moneyIn(first.amount, first.cur)}${first.cycle ? ` a ${CYCLE_NAME[first.cycle]}` : ''}` : `Added ${first.label}, ${moneyIn(first.amount, first.cur)}`;
   toast(msg, async () => { for (const [c, id] of made) await Store.del(c, id); });
   flashId = made.map(m => m[1]);
 }
@@ -867,23 +914,32 @@ $('#f-cur').innerHTML = CURRENCIES.map(c => `<option value="${c}">${c}</option>`
 function setKind(k) {
   sheetKind = k;
   $$('#sheet .seg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.kind === k)));
-  $$('#sheet [data-only="sub"]').forEach(el => el.hidden = k !== 'sub');
-  $('#f-date-lab').textContent = k === 'sub' ? 'First charge' : 'Date';
+  $$('#sheet [data-only]').forEach(el => el.hidden = !el.dataset.only.split(' ').includes(k));
+  $('#f-newcat-wrap').hidden = k === 'income' || $('#f-cat').value !== '__new';
+  $('#f-label').placeholder = k === 'income' ? 'Salary, a freelance job…' : 'Groceries, Netflix…';
   syncSubFields();
 }
 const editedSub = () => editing && editing.coll === 'subs' ? S.subs.find(x => x.id === editing.id) : null;
-// Ask what a new price means only when an existing subscription's price changes; ask for the end date only when it has ended.
+const editedIncome = () => editing && editing.coll === 'incomes' ? S.incomes.find(x => x.id === editing.id) : null;
+// Ask what a new price means only when an existing subscription's or repeating income's amount changes; ask for the end date only when it has ended.
 function syncSubFields() {
-  const prev = editedSub(), cur = $('#f-cur').value, amt = parseAmount($('#f-amount').value);
-  const repriced = sheetKind === 'sub' && prev && curOf(prev) === cur && amt > 0 && round(amt, cur) !== +prev.amount;
+  const inc = sheetKind === 'income', repeats = $('#f-repeat').value !== 'once';
+  const prev = sheetKind === 'sub' ? editedSub() : inc && repeats && editedIncome()?.cycle ? editedIncome() : null;
+  const cur = $('#f-cur').value, amt = parseAmount($('#f-amount').value);
+  const repriced = prev && curOf(prev) === cur && amt > 0 && round(amt, cur) !== +prev.amount;
   $('#f-price-row').hidden = !repriced;
+  $('#f-why-lab').textContent = inc ? 'This new amount is' : 'This new price is';
+  $('#f-why-change').textContent = inc ? 'A change, like a raise' : 'A price change';
+  $('#f-from-lab').textContent = inc ? 'New amount from' : 'New price from';
   $('#f-from-wrap').hidden = $('#f-why').value !== 'change';
+  $('#f-date-lab').textContent = sheetKind === 'sub' ? 'First charge' : inc && repeats ? 'First arrives' : 'Date';
+  $('#f-until-row').hidden = !inc || !repeats;
   const status = $('#f-status').value;
   $('#f-ended-row').hidden = sheetKind !== 'sub' || status === 'active';
   $('#f-ended-lab').textContent = status === 'paused' ? 'Paused on' : 'Cancelled on';
   if (status !== 'active' && !$('#f-ended').value) $('#f-ended').value = iso(today());
 }
-['#f-amount', '#f-cur', '#f-why', '#f-status'].forEach(s => $(s).addEventListener(s === '#f-amount' ? 'input' : 'change', syncSubFields));
+['#f-amount', '#f-cur', '#f-why', '#f-status', '#f-repeat'].forEach(s => $(s).addEventListener(s === '#f-amount' ? 'input' : 'change', syncSubFields));
 $('#f-cat').addEventListener('change', () => { $('#f-newcat-wrap').hidden = $('#f-cat').value !== '__new'; });
 async function ensureCat(name) {
   const known = allCats().find(c => c.name.toLowerCase() === name.toLowerCase());
@@ -899,12 +955,14 @@ function openSheet(target, prefill) {
   $('#delZone').innerHTML = target ? `<button type="button" class="danger" id="delBtn">Delete</button>` : '';
   let v;
   if (target) {
-    const rec = (target.coll === 'subs' ? S.subs : S.expenses).find(x => x.id === target.id);
+    const rec = S[target.coll].find(x => x.id === target.id);
     if (!rec) return;
     v = target.coll === 'subs'
       ? {kind:'sub', label:rec.name, amount:rec.amount, cur:curOf(rec), category:rec.category, date:rec.start, cycle:rec.cycle, status:rec.status||'active', endedOn:rec.endedOn, trial:!!rec.trial, pay:rec.pay||'auto', note:rec.note}
+      : target.coll === 'incomes'
+      ? {kind:'income', label:rec.label, amount:rec.amount, cur:curOf(rec), date:rec.date, cycle:rec.cycle, until:rec.endedOn, note:rec.note}
       : {kind:'once', label:rec.label, amount:rec.amount, cur:curOf(rec), category:rec.category, date:rec.date, note:rec.note};
-    $('#sheetTitle').textContent = target.coll === 'subs' ? 'Edit subscription' : 'Edit expense';
+    $('#sheetTitle').textContent = target.coll === 'subs' ? 'Edit subscription' : target.coll === 'incomes' ? 'Edit income' : 'Edit expense';
   } else {
     v = {kind:'once', label:'', amount:'', category:'other', date:iso(today()), cycle:'monthly', status:'active', trial:false, note:'', ...(prefill||{})};
     $('#sheetTitle').textContent = 'New entry';
@@ -919,6 +977,8 @@ function openSheet(target, prefill) {
   $('#f-cur').value = v.cur || entryCur();
   $('#f-date').value = v.date || iso(today());
   $('#f-cycle').value = v.cycle || 'monthly';
+  $('#f-repeat').value = v.kind === 'income' && v.cycle ? v.cycle : 'once';
+  $('#f-until').value = v.until || '';
   $('#f-status').value = v.status || 'active';
   $('#f-trial').checked = !!v.trial;
   $('#f-pay').value = v.pay || 'auto';
@@ -926,7 +986,7 @@ function openSheet(target, prefill) {
   $('#f-why').value = 'change';
   $('#f-from').value = iso(today());
   $('#f-ended').value = v.endedOn || '';
-  setKind(v.kind === 'sub' ? 'sub' : 'once');
+  setKind(['sub', 'income'].includes(v.kind) ? v.kind : 'once');
   sheet.showModal();
   setTimeout(() => $('#f-label').focus(), 30);
 }
@@ -935,13 +995,20 @@ sheet.addEventListener('click', e => { if (e.target === sheet) sheet.close(); })
 // No confirm step: the toast's Undo puts the entry back.
 $('#delZone').addEventListener('click', async e => {
   if (e.target.id !== 'delBtn' || !editing) return;
-  const arr = editing.coll === 'subs' ? S.subs : S.expenses;
-  const rec = arr.find(x => x.id === editing.id);
+  const rec = S[editing.coll].find(x => x.id === editing.id);
   const {coll, id} = editing;
   try { await Store.del(coll, id); } catch (err) { $('#sheetErr').textContent = dbMessage(err); return; }
   sheet.close();
   toast('Deleted ' + (rec.name || rec.label), async () => Store.put(coll, id, strip(rec)));
 });
+// A change keeps the old amount before its date; a correction replaces the latest amount.
+function newHistory(prev, start, price) {
+  const h = (prev.history || []).slice().sort((a,b) => a.from < b.from ? -1 : 1);
+  if ($('#f-why').value === 'fix') { if (h.length) h[h.length-1] = {...h[h.length-1], amount: price}; return h; }
+  const from = $('#f-from').value || iso(today());
+  if (!h.length) h.push({from: start, amount: +prev.amount});
+  return [...h.filter(x => x.from < from), {from, amount: price}];
+}
 $('#sheetForm').addEventListener('submit', async e => {
   e.preventDefault();
   const label = $('#f-label').value.trim();
@@ -951,11 +1018,14 @@ $('#sheetForm').addEventListener('submit', async e => {
   if (!(amount > 0)) { $('#sheetErr').textContent = 'Enter an amount above zero.'; $('#f-amount').focus(); return; }
   if (!date) { $('#sheetErr').textContent = 'Pick a date.'; $('#f-date').focus(); return; }
   const newCatName = $('#f-newcat').value.trim();
-  if ($('#f-cat').value === '__new' && !newCatName) { $('#sheetErr').textContent = 'Name the new category.'; $('#f-newcat').focus(); return; }
+  const cycle = sheetKind === 'income' && $('#f-repeat').value !== 'once' ? $('#f-repeat').value : null, until = cycle ? $('#f-until').value : '';
+  if (until && until < date) { $('#sheetErr').textContent = 'The last one can’t come before the first.'; $('#f-until').focus(); return; }
+  if (sheetKind !== 'income' && $('#f-cat').value === '__new' && !newCatName) { $('#sheetErr').textContent = 'Name the new category.'; $('#f-newcat').focus(); return; }
   const now = new Date().toISOString();
   const note = $('#f-note').value.trim(), cur = $('#f-cur').value;
   try {
-    const cat = $('#f-cat').value === '__new' ? await ensureCat(newCatName) : $('#f-cat').value;
+    const cat = sheetKind === 'income' ? null : $('#f-cat').value === '__new' ? await ensureCat(newCatName) : $('#f-cat').value;
+    // Changing an entry's kind saves the new record before removing the old one, then edits the new one, so a failed delete never loses it or duplicates it on retry.
     if (sheetKind === 'sub') {
       const prev = editedSub();
       const status = $('#f-status').value, price = round(amount, cur);
@@ -964,33 +1034,40 @@ $('#sheetForm').addEventListener('submit', async e => {
       if (!rec.payments) rec.payments = {};
       if (prev && curOf(prev) !== cur) rec.history = [];
       else if (prev && +prev.amount !== price) {
-        const h = (prev.history || []).slice().sort((a,b) => a.from < b.from ? -1 : 1);
         if ($('#f-why').value === 'fix') {
           // A correction replaces the wrong price wherever it was used, including payments recorded at it.
-          const since = h.length ? h[h.length-1].from : '';
-          if (h.length) h[h.length-1] = {...h[h.length-1], amount: price};
+          const since = (prev.history || []).map(x => x.from).sort().at(-1) || '';
           rec.payments = Object.fromEntries(Object.entries(rec.payments).map(([d, p]) => [d, d >= since && +p.amount === +prev.amount ? {...p, amount: price} : p]));
-          rec.history = h;
-        } else {
-          const from = $('#f-from').value || iso(today());
-          if (!h.length) h.push({from: prev.start, amount: +prev.amount});
-          rec.history = [...h.filter(x => x.from < from), {from, amount: price}];
         }
+        rec.history = newHistory(prev, prev.start, price);
       }
       if (status === 'active') delete rec.endedOn;
       else rec.endedOn = $('#f-ended').value || iso(today());
       const id = prev ? prev.id : uid();
-      if (editing && editing.coll === 'expenses') await Store.del('expenses', editing.id);
       flashId = [id];
       await Store.put('subs', id, rec);
+      if (editing && editing.coll !== 'subs') { const old = editing; editing = {coll:'subs', id}; await Store.del(old.coll, old.id); }
       toast(prev ? `Saved ${label}` : `Added ${label}, ${moneyIn(amount, cur)} a ${CYCLE_NAME[rec.cycle]}`);
+    } else if (sheetKind === 'income') {
+      const prev = editedIncome(), price = round(amount, cur);
+      const rec = {...(prev ? strip(prev) : {createdAt:now}), label, amount:price, cur, date, note};
+      // Only a repeating income that stays repeating, in the same currency, keeps its earlier amounts.
+      const keeps = cycle && prev && prev.cycle && curOf(prev) === cur;
+      rec.history = !keeps ? [] : +prev.amount !== price ? newHistory(prev, prev.date, price) : (prev.history || []);
+      if (cycle) rec.cycle = cycle; else delete rec.cycle;
+      if (until) rec.endedOn = until; else delete rec.endedOn;
+      const id = prev ? prev.id : uid();
+      flashId = [id];
+      await Store.put('incomes', id, rec);
+      if (editing && editing.coll !== 'incomes') { const old = editing; editing = {coll:'incomes', id}; await Store.del(old.coll, old.id); }
+      toast(prev ? `Saved ${label}` : `Added ${label}, +${moneyIn(amount, cur)}${cycle ? ` a ${CYCLE_NAME[cycle]}` : ''}`);
     } else {
       const prev = editing && editing.coll === 'expenses' ? S.expenses.find(x => x.id === editing.id) : null;
       const rec = {...(prev ? strip(prev) : {createdAt:now}), label, amount:round(amount, cur), cur, category:cat, date, note};
       const id = prev ? prev.id : uid();
-      if (editing && editing.coll === 'subs') await Store.del('subs', editing.id);
       flashId = [id];
       await Store.put('expenses', id, rec);
+      if (editing && editing.coll !== 'expenses') { const old = editing; editing = {coll:'expenses', id}; await Store.del(old.coll, old.id); }
       toast(prev ? `Saved ${label}` : `Added ${label}, ${moneyIn(amount, cur)}`);
     }
     sheet.close();
@@ -1001,7 +1078,7 @@ $('#sheetForm').addEventListener('submit', async e => {
 /* ---------- preferences ---------- */
 const prefs = $('#prefs');
 const curOptions = sel => CURRENCIES.map(c => `<option value="${c}" ${c === sel ? 'selected' : ''}>${c}, ${CUR_NAMES[c]}</option>`).join('');
-function usedCurrencies() { const set = new Set([dispCur(), entryCur()]); S.expenses.forEach(e => set.add(curOf(e))); S.subs.forEach(x => set.add(curOf(x))); return CURRENCIES.filter(c => set.has(c)); }
+function usedCurrencies() { const set = new Set([dispCur(), entryCur()]); S.expenses.forEach(e => set.add(curOf(e))); S.subs.forEach(x => set.add(curOf(x))); S.incomes.forEach(x => set.add(curOf(x))); return CURRENCIES.filter(c => set.has(c)); }
 let draftRates = {};
 function drawRates() {
   const disp = $('#p-cur').value;
@@ -1098,6 +1175,7 @@ $('#exportBtn').addEventListener('click', async () => {
   const rows = [['type','date','name','amount','currency',`amount in ${dc}`,'category','cycle','status','note']];
   for (const e of S.expenses) rows.push(['one-off', e.date, e.label, e.amount, curOf(e), round(conv(e.amount, curOf(e), e.date)), catOf(e.category).name, '', '', e.note||'']);
   for (const s of S.subs) rows.push(['subscription', s.start, s.name, s.amount, curOf(s), round(conv(s.amount, curOf(s))), catOf(s.category).name, s.cycle, s.status||'active', s.note||'']);
+  for (const i of S.incomes) rows.push(['income', i.date, i.label, i.amount, curOf(i), round(conv(i.amount, curOf(i), i.cycle ? undefined : i.date)), '', i.cycle||'', i.endedOn ? `until ${i.endedOn}` : '', i.note||'']);
   const csv = rows.map(r => r.map(v => { const t = String(v ?? ''); return /[",\n]/.test(t) ? '"' + t.replace(/"/g,'""') + '"' : t; }).join(',')).join('\n');
   const a = document.createElement('a');
   a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
@@ -1170,6 +1248,7 @@ document.addEventListener('click', e => {
   if (act === 'clear-ex') clearExamples();
   if (act === 'edit-sub') openSheet({coll:'subs', id});
   if (act === 'edit-once') openSheet({coll:'expenses', id});
+  if (act === 'edit-income') openSheet({coll:'incomes', id});
   if (act === 'home') { e.preventDefault(); S.month = today(); S.calSel = null; window.scrollTo(0, 0); goTo('ledger'); }
   // Month and Calendar share one month.
   if (act === 'month') { const d = S.month; S.month = new Date(d.getFullYear(), d.getMonth() + (+b.dataset.d), 1); S.calSel = null; render(); }
@@ -1183,7 +1262,7 @@ document.addEventListener('click', e => {
   if (act === 'pause') subAction(id, 'paused');
   if (act === 'cancel') subAction(id, 'cancelled');
   if (act === 'resume') subAction(id, 'active');
-  if (act === 'type') { Object.assign(S.filter, {type: b.dataset.v, auto: false, limit: PAGE}); render(); }
+  if (act === 'type') { Object.assign(S.filter, {type: b.dataset.v, auto: false, limit: PAGE}, b.dataset.v === 'income' ? {cat: ''} : {}); render(); }
   if (act === 'mark-paid') { e.stopPropagation(); setPaid(id, [b.dataset.date], true); }
   if (act === 'unpay') { e.stopPropagation(); setPaid(id, [b.dataset.date], false); }
   if (act === 'pay-ahead') openAhead(id);
@@ -1212,7 +1291,7 @@ function openAhead(id) {
   $('#aheadTitle').textContent = `Pay ahead for ${s.name}`;
   $('#aheadIntro').textContent = `${moneyIn(s.amount, curOf(s))} a ${CYCLE_NAME[s.cycle]}. The next unpaid charge is ${fmtDay(aheadPlan[0].date)}.`;
   $('#a-n').innerHTML = aheadPlan.map((c, i) => `<option value="${i+1}">${i+1} ${i ? 'charges' : 'charge'}, through ${fmtDay(c.date)} ${fromISO(c.date).getFullYear()}</option>`).join('');
-  $('#a-n').value = String(Math.min(s.cycle === 'yearly' ? 1 : s.cycle === 'quarterly' ? 4 : s.cycle === 'weekly' ? 4 : 3, aheadPlan.length));
+  $('#a-n').value = String(Math.min(s.cycle === 'yearly' ? 1 : s.cycle === 'quarterly' ? 4 : s.cycle === 'weekly' ? 4 : s.cycle === 'daily' ? 7 : 3, aheadPlan.length));
   $('#a-on').value = iso(today());
   $('#aheadErr').textContent = '';
   $('#a-amt-lab').textContent = `Total you paid, in ${curOf(s)}`;
@@ -1265,8 +1344,9 @@ function renderLedger(el) {
   const y = S.month.getFullYear(), m = S.month.getMonth();
   const from = new Date(y, m, 1), to = new Date(y, m, dim(y, m));
   const isCurrent = ymKey(from) === ymKey(t), isFuture = from > t;
-  const all = movements(from, to);
+  const all = movements(from, to), inc = incomeMoves(from, to);
   const past = all.filter(x => !x.future), future = all.filter(x => x.future);
+  const got = sum(inc.filter(x => !x.future)), expected = sum(inc.filter(x => x.future));
   const spent = sum(past), subsPart = sum(past.filter(x => x.kind === 'sub')), scheduled = sum(future);
   // comparison with same point last month
   const pFrom = new Date(y, m-1, 1);
@@ -1274,7 +1354,7 @@ function renderLedger(el) {
   const prevToPoint = sum(movements(pFrom, new Date(y, m-1, pDay), {includeFuture:false}));
   const diff = spent - prevToPoint;
   const name = MONTHS[m];
-  if (!S.expenses.length && !S.subs.length) {
+  if (!S.expenses.length && !S.subs.length && !S.incomes.length) {
     el.innerHTML = `${monthNav(S.month)}${emptyBlock('Nothing here yet', `Type your first expense in the line above, like <code>coffee 4.50</code>, or a subscription like <code>netflix 15.49 monthly</code>, then press Enter.`)}`;
     return;
   }
@@ -1288,7 +1368,9 @@ function renderLedger(el) {
     const overdue = sum(future.filter(x => x.overdue)), ahead = sum(past.filter(x => x.ahead));
     if (scheduled > 0) s2.push(`<b>${money(scheduled)}</b> is still to pay${overdue > 0 ? `, ${money(overdue)} of it overdue` : ''}.`);
     if (ahead > 0) s2.push(`<b>${money(ahead)}</b> went to paying subscriptions ahead of time.`);
+    if (got > 0) s2.push(`<b>${money(got)}</b> came in, ${money(Math.abs(got - spent))} ${got >= spent ? 'more' : 'less'} than you spent.`);
   }
+  if (expected > 0) s2.push(`<b>${money(expected)}</b>${got > 0 ? ' more' : ' of income'} is expected${isFuture ? ` in ${name}` : ' before the month ends'}.`);
   // budgets: one for subscriptions, one for everything else; each shows only when set
   const bc = S.settings.budgetCur || dispCur();
   // Subscriptions bill on fixed days, so only everyday spending gets the even-pace mark.
@@ -1305,8 +1387,9 @@ function renderLedger(el) {
   const budget = meters ? `<div><h2>Budgets</h2><div class="budgets">${meters}</div></div>` : '';
   // daily chart
   const days = dim(y, m);
-  const daily = Array.from({length: days}, () => ({once:0, sub:0, fut:0}));
+  const daily = Array.from({length: days}, () => ({once:0, sub:0, fut:0, inc:0}));
   for (const x of all) { const d = fromISO(x.date).getDate() - 1; if (x.future) daily[d].fut += x.amount; else daily[d][x.kind] += x.amount; }
+  for (const x of inc) daily[fromISO(x.date).getDate() - 1].inc += x.amount;
   const max = Math.max(1, ...daily.map(d => d.once + d.sub + d.fut));
   const W = chartW(), H = 180, padL = 0, padB = 22, gutR = 52, bw = (W - gutR) / days;
   const yScale = v => (v / max) * (H - padB - 12);
@@ -1322,7 +1405,7 @@ function renderLedger(el) {
     if (isCurrent && dayNum === t.getDate()) svg += `<line x1="${(i*bw+bw/2).toFixed(1)}" x2="${(i*bw+bw/2).toFixed(1)}" y1="${H-padB+2}" y2="${H-padB+6}" stroke="var(--ink)" stroke-width="2"/>`;
     // A full-height hit area per day, drawn over the bars: hover shows the split, click opens the day in Calendar.
     const ds = iso(new Date(y, m, dayNum));
-    const tipText = [fmtLong(ds), d.once && `One-off ${money(d.once)}`, d.sub && `Subscriptions ${money(d.sub)}`, d.fut && `Still to pay ${money(d.fut)}`].filter(Boolean);
+    const tipText = [fmtLong(ds), d.once && `One-off ${money(d.once)}`, d.sub && `Subscriptions ${money(d.sub)}`, d.fut && `Still to pay ${money(d.fut)}`, d.inc && `Income +${money(d.inc)}`].filter(Boolean);
     svg += `<rect class="hit" x="${(i*bw).toFixed(1)}" y="0" width="${bw.toFixed(1)}" height="${H - padB}" data-act="chart-day" data-date="${ds}" data-tip="${esc((tipText.length > 1 ? tipText : [...tipText, 'Nothing spent']).join('\n'))}"/>`;
   });
   svg += `</svg>`;
@@ -1332,7 +1415,7 @@ function renderLedger(el) {
   const cats = Object.entries(byCat).sort((a,b) => b[1]-a[1]);
   const catsHtml = cats.length ? `<ul class="cats">${cats.map(([id, v]) => { const c = catOf(id); const p = spent ? v/spent*100 : 0; return `<li class="click" data-act="filter-entries" data-cat="${esc(id)}" data-month="${ymKey(from)}" tabindex="0" role="button" aria-label="See ${esc(c.name)} entries in ${name}"><span class="nm">${esc(c.name)}</span><span class="num">${money(v)}<span class="pct">${Math.round(p)}%</span></span><span class="track"><i style="width:${p}%;background:var(--ink)"></i></span></li>`; }).join('')}</ul>` : `<p class="quiet">No spending recorded for ${name}.</p>`;
   // recent + biggest
-  const recent = all.slice(0, 9);
+  const recent = [...all, ...inc].sort(newestFirst).slice(0, 9);
   const biggest = past.filter(x => x.kind === 'once').sort((a,b) => b.amount - a.amount)[0];
   el.innerHTML = `
     <div>
@@ -1350,7 +1433,7 @@ function renderLedger(el) {
       <div>
         <h2>Latest in ${name}</h2>
         ${recent.length ? `<ul class="rows num">${recent.map(rowHtml).join('')}</ul>` : `<p class="quiet">Nothing logged this month.</p>`}
-        ${all.length > recent.length ? `<p style="margin:10px 0 0"><a href="#entries" class="ghost" style="padding:0" data-act="filter-entries" data-month="${ymKey(from)}">See all ${all.length} entries in ${name}</a></p>` : ''}
+        ${all.length + inc.length > recent.length ? `<p style="margin:10px 0 0"><a href="#entries" class="ghost" style="padding:0" data-act="filter-entries" data-month="${ymKey(from)}">See all ${all.length + inc.length} entries in ${name}</a></p>` : ''}
       </div>
       <div>
         <h2>Where it went</h2>
@@ -1368,6 +1451,10 @@ function niceTicks(max) {
   const out = []; for (let v = 0; v <= max + 1e-9; v += step) out.push(v); return out;
 }
 function rowHtml(x) {
+  if (x.kind === 'income') return `<li class="click ${x.future ? 'sched' : ''}" data-act="edit-income" data-id="${esc(x.ref.id)}" tabindex="0" role="button">
+    <span class="d">${fmtDay(x.date)}</span>
+    <span class="lbl">${esc(x.label)}<span class="meta">${incomeMeta(x)}</span>${incomeTag(x)}</span>
+    <span class="amt in">+${money(x.amount)}${origNote(x.raw, x.cur)}</span></li>`;
   const c = catOf(x.category);
   const act = x.kind === 'sub' ? 'edit-sub' : 'edit-once';
   const id = x.kind === 'sub' ? x.ref.id : x.id;
@@ -1389,6 +1476,7 @@ function renderSubs(el) {
   }
   const perMonth = live.reduce((a,s) => a + monthlyEq(s), 0);
   const perYear = perMonth * 12;
+  const regular = regularIncome();
   // share of spending last 90 days
   const f90 = addDays(t, -89);
   const mv90 = movements(f90, t, {includeFuture:false});
@@ -1473,6 +1561,7 @@ function renderSubs(el) {
         up30 ? `<b>${money(up30)}</b> is left to pay in the next 30 days${lateTotal ? `, ${money(lateTotal)} of it overdue` : ''}.` : `Nothing is left to pay in the next 30 days.`,
         aheadTotal ? `You’ve paid <b>${money(aheadTotal)}</b> ahead.` : '',
         H ? `Together they take ${(perMonth / H).toFixed(1)} hours of your work each month.` : '',
+        regular ? `They take <b>${Math.round(perMonth / regular * 100)}%</b> of your regular income.` : '',
         savedMonthly ? `Cancelled ones save you ${money(savedMonthly)} a month.` : '',
       ].filter(Boolean).join(' ')}</p>
     </div>
@@ -1508,6 +1597,8 @@ function renderCalendar(el) {
   const from = new Date(y, m, 1), to = new Date(y, m, days);
   const all = movements(from, to);
   const byDate = {}; for (const x of all) (byDate[x.date] = byDate[x.date] || []).push(x);
+  const inc = incomeMoves(from, to);
+  const incBy = {}; for (const x of inc) (incBy[x.date] = incBy[x.date] || []).push(x);
   const lead = (from.getDay() + 6) % 7;
   const cells = [];
   const head = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d => `<div class="hd">${d}</div>`).join('') + `<div class="hd wk">Week</div>`;
@@ -1520,30 +1611,33 @@ function renderCalendar(el) {
     else {
       const ds = iso(new Date(y, m, dnum)); const list = byDate[ds] || []; const tot = sum(list);
       week += tot;
-      const subs = list.filter(x => x.kind === 'sub');
+      const subs = list.filter(x => x.kind === 'sub'), gotDay = sum(incBy[ds] || []);
       const heat = tot ? Math.max(.12, tot / maxDay) : 0;
-      html += `<button type="button" class="cell ${ds === iso(t) ? 'today' : ''} ${ds > iso(t) ? 'future' : ''} ${S.calSel === ds ? 'sel' : ''} ${subs.length ? 'has-sub' : ''}" data-act="day" data-date="${ds}" aria-label="${fmtLong(ds)}${tot ? ', ' + money(tot) : ''}" style="${heat ? `background-image:linear-gradient(to top, color-mix(in srgb, var(--carbon) ${Math.round(heat*22)}%, transparent), transparent 70%)` : ''}">
+      html += `<button type="button" class="cell ${ds === iso(t) ? 'today' : ''} ${ds > iso(t) ? 'future' : ''} ${S.calSel === ds ? 'sel' : ''} ${subs.length ? 'has-sub' : ''}" data-act="day" data-date="${ds}" aria-label="${fmtLong(ds)}${tot ? ', ' + money(tot) : ''}${gotDay ? `, ${money(gotDay)} income` : ''}" style="${heat ? `background-image:linear-gradient(to top, color-mix(in srgb, var(--carbon) ${Math.round(heat*22)}%, transparent), transparent 70%)` : ''}">
         <span class="dn"><span>${dnum}</span></span>
         ${tot ? `<span class="tot num">${money(tot, {whole: tot >= 100})}</span>` : ''}
+        ${gotDay ? `<span class="inc num">+${money(gotDay, {whole: gotDay >= 100})}</span>` : ''}
         ${subs.slice(0, 2).map(x => `<span class="sb ${x.overdue ? 'late' : x.future ? 'todo' : ''}">${esc(x.label)}</span>`).join('')}${subs.length > 2 ? `<span class="sb">+${subs.length - 2} more</span>` : ''}
       </button>`;
     }
     if (i % 7 === 6) { html += `<div class="wk num">${week ? money(week, {whole:true}) : ''}</div>`; week = 0; }
   }
   const monthTotal = sum(all.filter(x => !x.future)), monthSched = sum(all.filter(x => x.future));
-  const sel = S.calSel && byDate[S.calSel] ? byDate[S.calSel] : [];
+  const monthIn = sum(inc);
+  const sel = S.calSel ? [...(byDate[S.calSel] || []), ...(incBy[S.calSel] || [])] : [];
+  const dayTotal = [spentOf(sel) && `Day total ${money(spentOf(sel))}`, cameIn(sel) && `${money(cameIn(sel))} income`].filter(Boolean).join(', ');
   const panel = S.calSel ? `<div class="daypanel">
       <h2>${fmtLong(S.calSel)}</h2>
-      ${sel.length ? `<ul class="rows num">${sel.map(rowHtml).join('')}</ul><p class="quiet">Day total ${money(sum(sel))}</p>` : `<p class="quiet">Nothing on this day.</p>`}
+      ${sel.length ? `<ul class="rows num">${sel.map(rowHtml).join('')}</ul><p class="quiet">${dayTotal}</p>` : `<p class="quiet">Nothing on this day.</p>`}
       <div><button type="button" class="mini" data-act="add-on" data-date="${S.calSel}">Add something on ${fmtDay(S.calSel)}</button></div>
     </div>` : `<p class="quiet">Select a day to see its entries.</p>`;
   el.innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
       ${monthNav(S.month)}
-      <p class="quiet num">${money(monthTotal)} spent${monthSched ? `, ${money(monthSched)} scheduled` : ''}</p>
+      <p class="quiet num">${money(monthTotal)} spent${monthSched ? `, ${money(monthSched)} scheduled` : ''}${monthIn ? `, ${money(monthIn)} income` : ''}</p>
     </div>
     <div><div class="cal">${head}${html}</div>
-    <div class="legend"><span class="key-paid">Paid subscription</span><span class="key-todo">To pay</span><span class="key-late">Overdue</span></div></div>
+    <div class="legend"><span class="key-paid">Paid subscription</span><span class="key-todo">To pay</span><span class="key-late">Overdue</span>${monthIn ? `<span class="key-in">Income</span>` : ''}</div></div>
     ${panel}`;
   // On phones the day's entries sit below the grid, so bring them into view after picking a day.
   if (S.scrollDay) {
@@ -1557,14 +1651,13 @@ function renderCalendar(el) {
 function renderEntries(el) {
   const f = S.filter;
   const ex = S.expenses.map(e => e.date).sort();
-  const earliest = [ex[0], ...S.subs.map(s => s.start)].filter(Boolean).sort()[0] || iso(today());
+  const earliest = [ex[0], ...S.subs.map(s => s.start), ...S.incomes.map(i => i.date)].filter(Boolean).sort()[0] || iso(today());
   const from = fromISO(earliest), to = today();
-  let list = movements(from, addDays(to, 31));
+  let list = [...movements(from, addDays(to, 31)), ...incomeMoves(from, addDays(to, 31))].sort(newestFirst);
   // months available
   const months = [...new Set(list.map(x => x.date.slice(0,7)))].sort().reverse();
-  if (f.type === 'once') list = list.filter(x => x.kind === 'once');
-  if (f.type === 'sub') list = list.filter(x => x.kind === 'sub');
-  if (f.cat) list = list.filter(x => catOf(x.category).id === f.cat);
+  if (f.type !== 'all') list = list.filter(x => x.kind === f.type);
+  if (f.cat) list = list.filter(x => x.kind !== 'income' && catOf(x.category).id === f.cat);
   if (f.month) list = list.filter(x => x.date.startsWith(f.month));
   if (f.q) { const k = f.q.toLowerCase(); list = list.filter(x => (x.label||'').toLowerCase().includes(k) || (x.note||'').toLowerCase().includes(k) || String(x.raw).includes(k)); }
   const groups = []; let cur = null;
@@ -1580,15 +1673,16 @@ function renderEntries(el) {
           <button type="button" data-act="type" data-v="all" aria-pressed="${f.type==='all'}">All</button>
           <button type="button" data-act="type" data-v="once" aria-pressed="${f.type==='once'}">One-off</button>
           <button type="button" data-act="type" data-v="sub" aria-pressed="${f.type==='sub'}">Subscriptions</button>
+          ${S.incomes.length || f.type === 'income' ? `<button type="button" data-act="type" data-v="income" aria-pressed="${f.type==='income'}">Income</button>` : ''}
         </div>
         <label for="e-cat" style="position:absolute;width:1px;height:1px;overflow:hidden">Category</label>
-        <select id="e-cat"><option value="">Every category</option>${allCats().map(c => `<option value="${c.id}" ${f.cat===c.id?'selected':''}>${esc(c.name)}</option>`).join('')}</select>
+        <select id="e-cat" ${f.type === 'income' ? 'hidden' : ''}><option value="">Every category</option>${allCats().map(c => `<option value="${c.id}" ${f.cat===c.id?'selected':''}>${esc(c.name)}</option>`).join('')}</select>
         <label for="e-month" style="position:absolute;width:1px;height:1px;overflow:hidden">Month</label>
         <select id="e-month"><option value="">Any month</option>${months.map(k => { const d = fromISO(k + '-01'); return `<option value="${k}" ${f.month===k?'selected':''}>${monthLabel(d)}</option>`; }).join('')}</select>
       </div>
-      <div class="summaryline num"><span>${list.length} ${list.length === 1 ? 'entry' : 'entries'}</span><span>${money(sum(list.filter(x=>!x.future)))} spent</span>${list.some(x=>x.future) ? `<span>${money(sum(list.filter(x=>x.future)))} scheduled</span>` : ''}${(f.q||f.cat||f.month||f.type!=='all') ? `<button type="button" class="ghost" id="e-reset">Clear filters</button>` : ''}</div>
-      ${groups.length ? groups.map(g => `<div class="daygroup"><h3><span>${fmtLong(g.date)}${g.date > iso(today()) ? ' · scheduled' : ''}</span><span class="num">${money(sum(g.items))}</span></h3><ul class="rows num">${g.items.map(x => { const c = catOf(x.category); const id = x.kind === 'sub' ? x.ref.id : x.id; return `<li class="click ${x.future?'sched':''}" data-act="${x.kind==='sub'?'edit-sub':'edit-once'}" data-id="${esc(id)}" tabindex="0" role="button"><span class="lbl">${esc(x.label)}${x.kind==='sub'?subTag(x):''}<span class="meta">${esc(c.name)}${x.note ? ' · ' + esc(x.note) : ''}</span></span><span class="amt">${money(x.amount)}${origNote(x.raw, x.cur)}</span></li>`; }).join('')}</ul></div>`).join('')
-        : (S.expenses.length || S.subs.length ? `<div class="empty" style="margin-top:18px"><strong>No entries match</strong>Try a different search or clear the filters.</div>` : `<div class="empty" style="margin-top:18px"><strong>Nothing logged yet</strong>Use the line at the top to add your first expense.</div>`)}
+      <div class="summaryline num"><span>${list.length} ${list.length === 1 ? 'entry' : 'entries'}</span>${f.type !== 'income' ? `<span>${money(spentOf(list.filter(x=>!x.future)))} spent</span>` : ''}${list.some(x=>x.future && x.kind !== 'income') ? `<span>${money(spentOf(list.filter(x=>x.future)))} scheduled</span>` : ''}${list.some(x=>x.kind === 'income' && !x.future) ? `<span>${money(cameIn(list.filter(x=>!x.future)))} came in</span>` : ''}${list.some(x=>x.future && x.kind === 'income') ? `<span>${money(cameIn(list.filter(x=>x.future)))} expected</span>` : ''}${(f.q||f.cat||f.month||f.type!=='all') ? `<button type="button" class="ghost" id="e-reset">Clear filters</button>` : ''}</div>
+      ${groups.length ? groups.map(g => `<div class="daygroup"><h3><span>${fmtLong(g.date)}${g.date > iso(today()) ? ' · scheduled' : ''}</span><span class="num">${[spentOf(g.items) && money(spentOf(g.items)), cameIn(g.items) && '+' + money(cameIn(g.items))].filter(Boolean).join(' · ')}</span></h3><ul class="rows num">${g.items.map(x => { if (x.kind === 'income') return `<li class="click ${x.future?'sched':''}" data-act="edit-income" data-id="${esc(x.ref.id)}" tabindex="0" role="button"><span class="lbl">${esc(x.label)}${incomeTag(x)}<span class="meta">${incomeMeta(x)}${x.note ? ' · ' + esc(x.note) : ''}</span></span><span class="amt in">+${money(x.amount)}${origNote(x.raw, x.cur)}</span></li>`; const c = catOf(x.category); const id = x.kind === 'sub' ? x.ref.id : x.id; return `<li class="click ${x.future?'sched':''}" data-act="${x.kind==='sub'?'edit-sub':'edit-once'}" data-id="${esc(id)}" tabindex="0" role="button"><span class="lbl">${esc(x.label)}${x.kind==='sub'?subTag(x):''}<span class="meta">${esc(c.name)}${x.note ? ' · ' + esc(x.note) : ''}</span></span><span class="amt">${money(x.amount)}${origNote(x.raw, x.cur)}</span></li>`; }).join('')}</ul></div>`).join('')
+        : (S.expenses.length || S.subs.length || S.incomes.length ? `<div class="empty" style="margin-top:18px"><strong>No entries match</strong>Try a different search or clear the filters.</div>` : `<div class="empty" style="margin-top:18px"><strong>Nothing logged yet</strong>Use the line at the top to add your first expense.</div>`)}
       ${list.length > f.limit ? `<p class="quiet">Showing the latest ${f.limit} of ${list.length}. <button type="button" class="ghost" data-act="more-entries">Show ${Math.min(PAGE, list.length - f.limit)} more</button></p>` : ''}
     </div>`;
   const qi = $('#e-q');

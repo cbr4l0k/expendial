@@ -1,20 +1,21 @@
 import { mkdir, rename } from "node:fs/promises";
 
 type Row = Record<string, unknown> & { id: string };
-type State = { rev: number; expenses: Row[]; subs: Row[]; settings: Record<string, unknown> };
+type State = { rev: number; expenses: Row[]; subs: Row[]; incomes: Row[]; settings: Record<string, unknown> };
 type Rates = Record<string, number>;
 type RateEntry = { on: string; rates: Rates | null; source: "auto" | "manual" };
 
 const DATA_DIR = process.env.DATA_DIR ?? "./data";
 const FILE = `${DATA_DIR}/state.json`;
-const COLLS = ["expenses", "subs"] as const;
+const COLLS = ["expenses", "subs", "incomes"] as const;
 // Keep in sync with DEFAULT_RATES in public/index.html.
 const CURRENCIES = ["USD", "EUR", "GBP", "RUB", "CLP", "COP", "MXN", "ARS", "PEN", "BRL", "CAD", "AUD", "JPY", "CHF", "CNY", "KZT"];
 const RATES_URL = "https://open.er-api.com/v6/latest/USD";
 
 await mkdir(DATA_DIR, { recursive: true });
 const stored = Bun.file(FILE);
-let state: State = (await stored.exists()) ? await stored.json() : { rev: 0, expenses: [], subs: [], settings: {} };
+// Ledgers saved before incomes existed get an empty list of them.
+let state: State = { rev: 0, expenses: [], subs: [], incomes: [], settings: {}, ...((await stored.exists()) ? await stored.json() : {}) };
 
 // Changes run one at a time; memory only moves forward once the new state is on disk.
 let queue: Promise<unknown> = Promise.resolve();
@@ -84,10 +85,11 @@ function localNow(tz: unknown): { date: string; hour: number } {
 const nextDay = (iso: string) => new Date(Date.parse(`${iso}T00:00:00Z`) + 864e5).toISOString().slice(0, 10);
 const ymd = (iso: string) => iso.split("-").map(Number) as [number, number, number];
 
-// Same rule as nthCharge in public/index.html: every 7 days, or the start's day of the month, clamped to short months.
+// Same rule as nthCharge in public/index.html: every day, every 7 days, or the start's day of the month, clamped to short months.
 function billsOn(sub: Sub, day: string): boolean {
   if (!sub.start || sub.start > day) return false;
   const [sy, sm, sd] = ymd(sub.start), [y, m, d] = ymd(day);
+  if (sub.cycle === "daily") return true;
   if (sub.cycle === "weekly") return ((Date.UTC(y, m - 1, d) - Date.UTC(sy, sm - 1, sd)) / 864e5) % 7 === 0;
   const step = sub.cycle === "quarterly" ? 3 : sub.cycle === "yearly" ? 12 : 1;
   return ((y - sy) * 12 + (m - sm)) % step === 0 && d === Math.min(sd, new Date(Date.UTC(y, m, 0)).getUTCDate());
@@ -123,8 +125,9 @@ async function checkReminders() {
   if (now.hour < NOTIFY_HOUR) return;
   const day = nextDay(now.date);
   const sent = isObject(ntfySent) && ntfySent.day === day && Array.isArray(ntfySent.keys) ? (ntfySent.keys as string[]) : [];
+  // Daily charges would mean a reminder every day, so only longer cycles get one.
   const due = (state.subs as Sub[]).filter(
-    (s) => billsUntil(s, day) && billsOn(s, day) && !s.payments?.[day] && !sent.includes(`${s.id}@${day}`),
+    (s) => s.cycle !== "daily" && billsUntil(s, day) && billsOn(s, day) && !s.payments?.[day] && !sent.includes(`${s.id}@${day}`),
   );
   if (!due.length) return;
   const lines = due.map((s) => {
