@@ -1,35 +1,38 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Outgoing</title>
-<meta name="claude:viewport-fit-sides" content="cover">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Expendial</title>
+<script>try { const t = localStorage.getItem('expendial-theme'); if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t; } catch {}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
 /* Layout: one sticky "carbon line" (brand, views, quick-add) over a single left-aligned column of view content, max 1080px. */
 :root{
-  --paper:#F1F2EE; --sheet:#FFFFFF; --ink:#1D2433; --ink-2:#5B6373; --ink-3:#8C93A0;
+  --paper:#F1F2EE; --sheet:#FFFFFF; --ink:#1D2433; --ink-2:#4A5160; --ink-3:#686E7A;
   --rule:#D8DBD4; --carbon:#3341B5; --carbon-wash:#E4E7F8; --due:#9A5B00; --due-wash:#F7ECD9; --stop:#B3261E;
-  --c0:#3341B5; --c1:#2E7D6B; --c2:#B4632A; --c3:#8A4FA3; --c4:#5E7A1F; --c5:#B23A5E; --c6:#2C6FA0; --c7:#7A6A3A; --c8:#4F5A6B; --c9:#A0428F;
   --display:"Bricolage Grotesque", "Avenir Next Condensed", "Arial Narrow", system-ui, sans-serif;
   --body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
   --s-1:.8125rem; --s0:1rem; --s1:1.1875rem; --s2:1.5rem; --s3:2.125rem; --s4:3rem;
   color-scheme:light;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --paper:#151922; --sheet:#1C212C; --ink:#E7E9E3; --ink-2:#A1A8B4; --ink-3:#6E7684;
+  --paper:#151922; --sheet:#1C212C; --ink:#E7E9E3; --ink-2:#A1A8B4; --ink-3:#8A92A0;
   --rule:#2D3341; --carbon:#97A2FF; --carbon-wash:#262C4D; --due:#F0B04A; --due-wash:#3A2E18; --stop:#FF8F86;
-  --c0:#97A2FF; --c1:#5FC4AA; --c2:#E9965C; --c3:#C694DD; --c4:#A7C760; --c5:#EC7FA0; --c6:#6FB2E6; --c7:#CDB878; --c8:#A3AEC0; --c9:#E08CD2;
   color-scheme:dark;
 }}
 :root[data-theme="dark"]{
-  --paper:#151922; --sheet:#1C212C; --ink:#E7E9E3; --ink-2:#A1A8B4; --ink-3:#6E7684;
+  --paper:#151922; --sheet:#1C212C; --ink:#E7E9E3; --ink-2:#A1A8B4; --ink-3:#8A92A0;
   --rule:#2D3341; --carbon:#97A2FF; --carbon-wash:#262C4D; --due:#F0B04A; --due-wash:#3A2E18; --stop:#FF8F86;
-  --c0:#97A2FF; --c1:#5FC4AA; --c2:#E9965C; --c3:#C694DD; --c4:#A7C760; --c5:#EC7FA0; --c6:#6FB2E6; --c7:#CDB878; --c8:#A3AEC0; --c9:#E08CD2;
   color-scheme:dark;
 }
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:var(--s0);line-height:1.5;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:var(--s0);line-height:1.5;-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
 button,input,select,textarea{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--carbon);outline-offset:2px;border-radius:3px}
@@ -39,8 +42,9 @@ button,input,select,textarea{font:inherit;color:inherit}
 /* dock */
 .dock{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);border-bottom:1px solid var(--rule)}
 .bar{display:flex;align-items:center;gap:20px;padding-block:14px 6px;flex-wrap:wrap}
-.brand{font-family:var(--display);font-weight:650;font-size:var(--s1);font-variation-settings:"wdth" 80;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.brand{font-family:var(--display);font-weight:650;font-size:var(--s1);font-variation-settings:"wdth" 80;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;color:inherit;text-decoration:none}
 .brand svg{display:block}
+.tools{display:flex;gap:8px}
 nav.views{display:flex;gap:2px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
 nav.views a{padding:6px 12px;border-radius:999px;color:var(--ink-2);text-decoration:none;white-space:nowrap;font-size:var(--s-1)}
 nav.views a:hover{color:var(--ink)}
@@ -54,6 +58,8 @@ nav.views a[aria-current="page"]{background:var(--ink);color:var(--paper)}
 #q{flex:1;min-width:0;border:0;border-bottom:2px solid var(--ink);background:transparent;padding:8px 0 6px;font-family:var(--display);font-size:clamp(1.375rem,3.4vw,2.125rem);font-weight:400;font-variation-settings:"wdth" 85;letter-spacing:-.015em;outline:none;resize:none;height:auto;line-height:1.2;overflow:hidden}
 #q::placeholder{color:var(--ink-3)}
 #q:focus{border-bottom-color:var(--carbon)}
+#qcur{border:1px solid var(--rule);background:var(--sheet);border-radius:999px;padding:7px 10px;font-size:var(--s-1);color:var(--ink-2);cursor:pointer}
+#qcur:hover{color:var(--ink);border-color:var(--ink-3)}
 .go{border:0;background:var(--carbon);color:var(--sheet);border-radius:999px;padding:9px 18px;font-weight:700;cursor:pointer;white-space:nowrap}
 .go:disabled{background:var(--rule);color:var(--ink-3);cursor:default}
 .ghost{border:0;background:none;color:var(--ink-2);padding:9px 4px;cursor:pointer;white-space:nowrap;text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:4px}
@@ -85,6 +91,7 @@ h2{font-family:var(--display);font-weight:600;font-variation-settings:"wdth" 85;
 .monthnav button{background:none;border:1px solid var(--rule);border-radius:999px;width:30px;height:30px;cursor:pointer;color:var(--ink-2);line-height:1}
 .monthnav button:hover{color:var(--ink);border-color:var(--ink-3)}
 .monthnav strong{color:var(--ink);font-weight:700;min-width:8.5em;text-align:center}
+.monthnav .mini{width:auto;height:auto;margin-left:6px;line-height:1.5}
 
 .statement{font-family:var(--display);font-weight:350;font-variation-settings:"wdth" 82;font-size:clamp(1.75rem,4.6vw,3rem);line-height:1.08;letter-spacing:-.025em;margin:16px 0 0;max-width:22ch;text-wrap:balance}
 .statement-2{max-width:60ch;color:var(--ink-2);font-size:var(--s1);margin:14px 0 0}
@@ -97,10 +104,17 @@ h2{font-family:var(--display);font-weight:600;font-variation-settings:"wdth" 85;
 .meter i{position:absolute;inset:0 auto 0 0;border-radius:999px;background:var(--ink)}
 .meter i.over{background:var(--stop)}
 .meter b{position:absolute;top:-5px;bottom:-5px;width:2px;background:var(--carbon)}
+.budgets{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px 48px}
+.budget-h{margin:0;font-weight:700;font-size:var(--s-1)}
 .meter-legend{display:flex;justify-content:space-between;gap:12px;font-size:var(--s-1);color:var(--ink-2);margin-top:8px;flex-wrap:wrap}
 
 .chart{width:100%;height:auto;display:block}
-.chart text{fill:var(--ink-3);font-family:var(--body);font-size:11px}
+.chart text{fill:var(--ink-3);font-family:var(--body);font-size:12px}
+.chart .hit{fill:transparent;cursor:pointer}
+.chart .hit:hover{fill:color-mix(in srgb,var(--carbon) 10%,transparent)}
+.chart circle[data-act]{cursor:pointer}
+.chart circle[data-act]:hover{stroke-width:3}
+.tip{position:fixed;z-index:30;pointer-events:none;background:var(--ink);color:var(--paper);padding:6px 10px;border-radius:8px;font-size:var(--s-1);line-height:1.4;white-space:pre-line;max-width:260px}
 .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:var(--s-1);color:var(--ink-2);margin-top:8px}
 .legend span{display:inline-flex;gap:6px;align-items:center}
 
@@ -110,6 +124,9 @@ h2{font-family:var(--display);font-weight:600;font-variation-settings:"wdth" 85;
 .cats .track i{display:block;height:100%;border-radius:999px}
 .cats .nm{display:flex;align-items:center;gap:8px}
 .cats .pct{color:var(--ink-3);font-size:var(--s-1);margin-left:6px}
+.cats li.click{cursor:pointer}
+.cats li.click:hover .nm{text-decoration:underline;text-decoration-color:var(--ink-3);text-underline-offset:3px}
+.cats li.click:hover .track i{background:var(--carbon)!important}
 
 .rows{list-style:none;margin:0;padding:0}
 .rows li{display:grid;grid-template-columns:4.5em minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:9px 0;border-top:1px solid var(--rule)}
@@ -121,7 +138,8 @@ h2{font-family:var(--display);font-weight:600;font-variation-settings:"wdth" 85;
 .rows .amt small{display:block;font-size:.75rem;color:var(--ink-3);line-height:1.2}
 .rows li.sched{color:var(--ink-2)}
 .rows li.sched .amt{color:var(--ink-2)}
-.rowbtn{all:unset;cursor:pointer;display:contents}
+.rowbtn{all:unset;cursor:pointer;min-width:0}
+.rowbtn:focus-visible{outline:2px solid var(--carbon);outline-offset:2px;border-radius:3px}
 .rows li.click{cursor:pointer}
 .rows li.click:hover .lbl{text-decoration:underline;text-decoration-color:var(--ink-3);text-underline-offset:3px}
 .tag-sub.todo{background:var(--due-wash);color:var(--due)}
@@ -135,7 +153,7 @@ h2{font-family:var(--display);font-weight:600;font-variation-settings:"wdth" 85;
 .rows.pay .meta.late{color:var(--stop)}
 .cal .sb.todo{color:var(--due)}
 .cal .sb.late{color:var(--stop)}
-.tag-sub{display:inline-block;font-size:.6875rem;padding:0 6px;border-radius:4px;background:var(--carbon-wash);color:var(--carbon);margin-left:6px;vertical-align:1px}
+.tag-sub{display:inline-block;font-size:.75rem;padding:0 6px;border-radius:4px;background:var(--carbon-wash);color:var(--carbon);margin-left:6px;vertical-align:1px}
 
 .empty{padding:28px;border:1px dashed var(--rule);border-radius:12px;color:var(--ink-2);max-width:56ch}
 .empty strong{display:block;color:var(--ink);font-family:var(--display);font-weight:600;font-size:var(--s1);margin-bottom:4px}
@@ -186,10 +204,9 @@ table.subs tr.off td{color:var(--ink-3)}
 .cal .cell.today .dn span:first-child{background:var(--ink);color:var(--paper);border-radius:999px;padding:0 7px}
 .cal .tot{font-family:var(--display);font-variation-settings:"wdth" 80;font-weight:500;font-size:var(--s1);line-height:1.1;letter-spacing:-.01em}
 .cal .cell.future .tot{color:var(--ink-3)}
-.cal .sb{font-size:.6875rem;line-height:1.3;color:var(--carbon);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cal .sb{font-size:.75rem;line-height:1.3;color:var(--carbon);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cal .cell.future .sb{color:var(--due)}
 .cal .wk{border-bottom:1px solid var(--rule);padding:6px;text-align:right;font-size:var(--s-1);color:var(--ink-2);display:flex;flex-direction:column;justify-content:flex-start}
-.heat{position:absolute;inset:auto 0 0 0;height:3px}
 @media (max-width:640px){
   .cal{grid-template-columns:repeat(7,minmax(0,1fr))}
   .cal .wk,.cal .hd.wk{display:none}
@@ -232,12 +249,13 @@ dialog::backdrop{background:rgba(15,20,35,.42)}
 .sheet-foot{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding-top:6px}
 .sheet-foot .go{margin-left:auto}
 .danger{border:0;background:none;color:var(--stop);cursor:pointer;padding:9px 4px}
-.confirm{display:flex;gap:8px;align-items:center;font-size:var(--s-1);color:var(--stop)}
 .err{color:var(--stop);font-size:var(--s-1);min-height:1em;margin:0}
 
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);padding:10px 12px 10px 16px;border-radius:999px;display:flex;gap:14px;align-items:center;font-size:var(--s-1);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:20;max-width:calc(100vw - 32px)}
 .toast.on{opacity:1;transform:translateX(-50%);pointer-events:auto}
 .toast button{border:0;background:var(--paper);color:var(--ink);border-radius:999px;padding:3px 12px;cursor:pointer;font-size:var(--s-1)}
+.fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:15;width:56px;height:56px;border:0;border-radius:50%;background:var(--carbon);color:var(--sheet);font-size:30px;line-height:1;cursor:pointer;box-shadow:0 10px 24px -8px rgba(10,14,30,.5)}
+@media (min-width:561px){.fab{display:none!important}}
 
 @keyframes stamp{0%{background:var(--carbon-wash)}100%{background:transparent}}
 .stamp{animation:stamp 1.4s ease-out}
@@ -245,7 +263,16 @@ dialog::backdrop{background:rgba(15,20,35,.42)}
 @media (max-width:560px){
   .bar{gap:10px}
   nav.views{order:3;flex-basis:100%}
-  .iconbtn{margin-left:auto}
+  .tools{margin-left:auto}
+  .toast{bottom:calc(88px + env(safe-area-inset-bottom,0px))}
+  table.subs{min-width:0}
+  table.subs thead{display:none}
+  table.subs,table.subs tbody,table.subs td{display:block}
+  table.subs tr{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 16px;padding:14px 0;border-bottom:1px solid var(--rule)}
+  table.subs td{padding:0;border:0;text-align:left}
+  table.subs td.nm,table.subs td.acts{grid-column:1/-1}
+  table.subs td[data-label]::before{content:attr(data-label);display:block;color:var(--ink-3);font-size:var(--s-1)}
+  table.subs .rowacts{justify-content:flex-start}
   .line{flex-wrap:wrap}
   .line .go{flex:1}
   #q{flex-basis:100%}
@@ -258,26 +285,32 @@ dialog::backdrop{background:rgba(15,20,35,.42)}
   .rows.pay li .mini{grid-column:2 / -1;justify-self:start}
 }
 </style>
+</head>
+<body>
 
 <div class="dock">
   <div class="wrap">
     <div class="bar">
-      <div class="brand">
+      <a class="brand" href="#ledger" data-act="home">
         <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><rect x="3" y="2" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M7 8h8M7 12h8M7 16h4" stroke="var(--carbon)" stroke-width="1.6" stroke-linecap="round"/></svg>
-        Outgoing
-      </div>
+        Expendial
+      </a>
       <nav class="views" aria-label="Views">
         <a href="#ledger" data-v="ledger">Month</a>
         <a href="#subscriptions" data-v="subscriptions">Subscriptions</a>
         <a href="#calendar" data-v="calendar">Calendar</a>
         <a href="#entries" data-v="entries">All entries</a>
       </nav>
-      <button class="iconbtn" id="openSettings" type="button">Preferences</button>
+      <div class="tools">
+        <button class="iconbtn" id="themeBtn" type="button">Theme: auto</button>
+        <button class="iconbtn" id="openSettings" type="button">Preferences</button>
+      </div>
     </div>
     <form class="capture" id="capture" autocomplete="off">
       <div class="line">
         <label for="q">Add an expense or subscription</label>
         <textarea id="q" rows="1" placeholder="lunch 12.50 yesterday, or spotify 11.99 monthly" spellcheck="false"></textarea>
+        <select id="qcur" aria-label="Currency for new entries" title="Currency for new entries. Typing a code like cop or ₽ overrides it for one entry."></select>
         <button class="go" id="addBtn" type="submit" disabled>Add</button>
         <button class="ghost" id="moreBtn" type="button">More fields</button>
       </div>
@@ -309,12 +342,20 @@ dialog::backdrop{background:rgba(15,20,35,.42)}
       <div class="field"><label for="f-cat">Category</label><select id="f-cat"></select></div>
       <div class="field"><label for="f-date" id="f-date-lab">Date</label><input id="f-date" type="date"></div>
     </div>
+    <div class="field" id="f-newcat-wrap" hidden><label for="f-newcat">New category name</label><input id="f-newcat" placeholder="Domains, Pets…"></div>
+    <div class="grid2" id="f-price-row" hidden>
+      <div class="field"><label for="f-why">This new price is</label>
+        <select id="f-why"><option value="change">A price change</option><option value="fix">A correction, the current price was wrong</option></select></div>
+      <div class="field" id="f-from-wrap"><label for="f-from">New price from</label><input id="f-from" type="date"></div>
+    </div>
     <div class="grid2" data-only="sub">
       <div class="field"><label for="f-cycle">Billed</label>
         <select id="f-cycle"><option value="weekly">Weekly</option><option value="monthly" selected>Monthly</option><option value="quarterly">Every 3 months</option><option value="yearly">Yearly</option></select></div>
       <div class="field"><label for="f-status">Status</label>
         <select id="f-status"><option value="active">Active</option><option value="paused">Paused</option><option value="cancelled">Cancelled</option></select></div>
     </div>
+    <div class="field" id="f-ended-row" hidden><label for="f-ended" id="f-ended-lab">Cancelled on</label><input id="f-ended" type="date">
+      <p class="quiet">Charges after this day stop counting.</p></div>
     <div class="field" data-only="sub"><label for="f-pay">How you pay</label>
       <select id="f-pay"><option value="auto">Charged automatically, counts as paid on its date</option><option value="manual">I pay it myself, I’ll mark each payment</option></select></div>
     <label class="check" data-only="sub"><input type="checkbox" id="f-trial"> Free trial, the first charge is on the date above</label>
@@ -331,16 +372,25 @@ dialog::backdrop{background:rgba(15,20,35,.42)}
 <dialog id="prefs">
   <form class="sheet" id="prefsForm" method="dialog">
     <h2>Preferences</h2>
+    <div class="field"><label for="p-cur">Show totals in</label><select id="p-cur"></select></div>
     <div class="grid2">
-      <div class="field"><label for="p-cur">Show totals in</label><select id="p-cur"></select></div>
-      <div class="field"><label for="p-entry">New entries are in</label><select id="p-entry"></select></div>
+      <div class="field"><label for="p-budget-subs" data-cur-label="Monthly budget for subscriptions">Monthly budget for subscriptions</label><input id="p-budget-subs" inputmode="decimal" placeholder="Leave empty for none"></div>
+      <div class="field"><label for="p-budget-once" data-cur-label="Monthly budget for everything else">Monthly budget for everything else</label><input id="p-budget-once" inputmode="decimal" placeholder="Leave empty for none"></div>
     </div>
-    <p class="sub-h" style="margin:-6px 0 0">To log one entry in another currency, add its code or symbol, like <b>cop</b> or <b>₽</b>.</p>
-    <div class="field"><label for="p-budget" id="p-budget-lab">Monthly budget</label><input id="p-budget" inputmode="decimal" placeholder="Leave empty for none"></div>
-    <div class="field"><label for="p-hourly" id="p-hourly-lab">What an hour of your work earns, after tax</label><input id="p-hourly" inputmode="decimal" placeholder="Optional. Shows subscriptions in hours of work"></div>
-    <div class="field"><span class="lab" id="p-rates-lab">Exchange rates</span>
+    <div class="field"><label for="p-hourly" data-cur-label="What an hour of your work earns, after tax">What an hour of your work earns, after tax</label><input id="p-hourly" inputmode="decimal" placeholder="Optional. Shows subscriptions in hours of work"></div>
+    <div class="field"><span class="lab">Exchange rates</span>
+      <label class="check"><input type="checkbox" id="p-auto"> Update them every day from open.er-api.com</label>
       <div id="p-rates" class="rates"></div>
+      <p class="quiet" id="p-rates-note"></p>
       <button type="button" class="ghost" id="p-rates-reset" style="justify-self:start;padding:2px 0">Reset to the default rates</button>
+    </div>
+    <div class="field"><label for="p-ntfy">Reminders on ntfy, the day before each charge</label>
+      <div style="display:flex;gap:6px;align-items:center"><input id="p-ntfy" type="url" placeholder="ntfy.sh/your-secret-topic" style="min-width:0"><button type="button" class="mini" id="p-ntfy-test" style="white-space:nowrap">Send a test</button></div>
+      <input id="p-ntfy-token" placeholder="Access token, only if your topic needs one" autocomplete="off" aria-label="ntfy access token">
+      <p class="quiet">Sent from about 9:00 your time. Anyone who knows a public topic’s name can read it, so pick one that’s hard to guess. Leave empty for no reminders.</p>
+    </div>
+    <div class="field"><span class="lab">Your categories</span>
+      <div id="p-cats" class="rates"></div>
     </div>
     <div class="field"><span class="lab">Your data</span>
       <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -375,6 +425,8 @@ dialog::backdrop{background:rgba(15,20,35,.42)}
 </dialog>
 
 <div class="toast" id="toast" role="status"><span id="toastMsg"></span><button type="button" id="toastUndo" hidden>Undo</button></div>
+<div class="tip" id="tip" aria-hidden="true" hidden></div>
+<button class="fab" id="fab" type="button" aria-label="Add an expense or subscription" hidden>+</button>
 
 <script>
 (() => {
@@ -412,20 +464,34 @@ const CATS = [
   {id:'learning', name:'Learning', words:['course','udemy','coursera','duolingo','class','tuition','masterclass','newspaper','news','nyt','substack','medium','magazine']},
   {id:'other', name:'Other', words:[]},
 ];
-const CAT = Object.fromEntries(CATS.map((c,i) => [c.id, {...c, color:`var(--c${i % 10})`}]));
-CAT.other.color = 'var(--c8)';
-const catOf = id => CAT[id] || CAT.other;
+const OTHER = CATS[CATS.length - 1];
+// Your own categories live in settings.cats as {id, name}; they sit before Other.
+const customCats = () => (Array.isArray(S.settings.cats) ? S.settings.cats : []).filter(c => c && c.id && c.name);
+const allCats = () => [...CATS.slice(0, -1), ...customCats().map(c => ({id:c.id, name:c.name, words:[c.name.toLowerCase()]})), OTHER];
+const catOf = id => allCats().find(c => c.id === id) || OTHER;
+// A new category never reuses an id still on entries, so re-creating a removed one doesn't pull its old entries back.
+function catId(name) {
+  const base = 'c-' + name.toLowerCase().replace(/[^\p{L}\d]+/gu, '-').replace(/^-|-$/g, '');
+  const taken = id => customCats().some(c => c.id === id) || S.expenses.some(e => e.category === id) || S.subs.some(s => s.category === id);
+  let id = base;
+  for (let n = 2; taken(id); n++) id = `${base}-${n}`;
+  return id;
+}
 const CYCLE_NAME = {weekly:'week', monthly:'month', quarterly:'3 months', yearly:'year'};
 const CYCLE_ADJ = {weekly:'Weekly', monthly:'Monthly', quarterly:'Quarterly', yearly:'Yearly'};
 const PER_MONTH = {weekly:52/12, monthly:1, quarterly:1/3, yearly:1/12};
 
 /* ---------- state ---------- */
 const S = {
-  expenses: [], subs: [], settings: {currency:'USD', budget:0, hourly:0},
+  expenses: [], subs: [], settings: {currency:'USD', budgetSubs:0, budgetOnce:0, hourly:0},
   ready: false, mode: 'loading',
-  view: 'ledger', month: today(), calMonth: today(), calSel: null,
-  filter: {q:'', type:'all', cat:'', month:''},
+  view: 'ledger', month: today(), calSel: null, scrollDay: false,
+  filter: null,
 };
+// auto marks a filter set by a link elsewhere, so the nav's "All entries" starts clean again.
+const PAGE = 400;
+const freshFilter = () => ({q:'', type:'all', cat:'', month:'', auto:false, limit:PAGE});
+S.filter = freshFilter();
 let fmtCache = {};
 const money = (n, opts = {}) => {
   const cur = S.settings.currency || 'USD';
@@ -450,8 +516,16 @@ const CUR_NAMES = {USD:'US dollars', EUR:'Euros', GBP:'British pounds', RUB:'Rus
 const dispCur = () => S.settings.currency || 'USD';
 const entryCur = () => S.settings.entryCur || dispCur();
 const curOf = rec => (rec && rec.cur) || S.settings.legacyCur || 'USD';
-const rateOf = c => +((S.settings.rates || {})[c]) || DEFAULT_RATES[c] || 1;
-const conv = (n, from, to = dispCur()) => from === to ? (+n || 0) : (+n || 0) / rateOf(from) * rateOf(to);
+// settings.rateLog holds the rates of each day; a dated amount converts at the rates of its own day, an undated one at the latest.
+function ratesOn(date) {
+  const log = S.settings.rateLog;
+  if (!date || !Array.isArray(log) || !log.length) return S.settings.rates || {};
+  let r = log[0].rates;
+  for (const e of log) if (e.on <= date) r = e.rates;
+  return r || {};
+}
+const rateOf = (c, date) => +ratesOn(date)[c] || DEFAULT_RATES[c] || 1;
+const conv = (n, from, date) => { const to = dispCur(); return from === to ? (+n || 0) : (+n || 0) / rateOf(from, date) * rateOf(to, date); };
 let fmtIn = {};
 const moneyIn = (n, cur) => { cur = cur || dispCur(); if (!fmtIn[cur]) { try { fmtIn[cur] = new Intl.NumberFormat(undefined, {style:'currency', currency:cur, currencyDisplay: ['RUB','KZT'].includes(cur) ? 'narrowSymbol' : 'symbol'}); } catch { fmtIn[cur] = new Intl.NumberFormat(undefined, {style:'currency', currency:'USD'}); } } return fmtIn[cur].format(n || 0); };
 const origNote = (raw, cur) => cur && cur !== dispCur() ? `<small>${esc(moneyIn(raw, cur))}</small>` : '';
@@ -497,7 +571,7 @@ function charges(sub, from, to) {
     k = Math.max(0, Math.floor(months/step) - 1);
   }
   for (let d = nthCharge(sub, start, k); d <= end && k < 5000; d = nthCharge(sub, start, ++k)) {
-    if (d >= from) { const ds = iso(d); const st = payState(sub, ds); const raw = st.amount > 0 ? st.amount : priceAt(sub, ds); out.push({date: ds, raw, cur: curOf(sub), amount: conv(raw, curOf(sub)), sub, paid: st.paid, paidOn: st.paidOn || null, overdue: !!st.overdue, ahead: !!(st.paid && st.paidOn && st.paidOn < ds)}); }
+    if (d >= from) { const ds = iso(d); const st = payState(sub, ds); const raw = st.amount > 0 ? st.amount : priceAt(sub, ds); out.push({date: ds, raw, cur: curOf(sub), amount: conv(raw, curOf(sub), st.paidOn || ds), sub, paid: st.paid, paidOn: st.paidOn || null, overdue: !!st.overdue, ahead: !!(st.paid && st.paidOn && st.paidOn < ds)}); }
   }
   return out;
 }
@@ -519,7 +593,7 @@ function priceChange(sub) {
 function movements(from, to, {includeFuture = true} = {}) {
   const f = iso(from), t = iso(to), now = iso(today());
   const out = [];
-  for (const e of S.expenses) if (e.date >= f && e.date <= t) out.push({id:e.id, kind:'once', date:e.date, raw:+e.amount||0, cur:curOf(e), amount:conv(+e.amount||0, curOf(e)), label:e.label, category:e.category, note:e.note, future:e.date > now, ref:e});
+  for (const e of S.expenses) if (e.date >= f && e.date <= t) out.push({id:e.id, kind:'once', date:e.date, raw:+e.amount||0, cur:curOf(e), amount:conv(+e.amount||0, curOf(e), e.date), label:e.label, category:e.category, note:e.note, future:e.date > now, ref:e});
   // A paid charge counts on the day it was paid (paying ahead moves it earlier); an unpaid one sits on its due date.
   for (const s of S.subs) for (const c of charges(s, addDays(from, -400), addDays(to, 800))) {
     const eff = c.paid ? c.paidOn : c.date;
@@ -588,7 +662,7 @@ function parseAmount(str) {
 function guessCategory(text) {
   const t = ' ' + text.toLowerCase() + ' ';
   let best = null, bestLen = 0;
-  for (const c of CATS) for (const w of c.words) {
+  for (const c of allCats()) for (const w of c.words) {
     const rx = new RegExp('(^|[^a-z])' + w.replace(/[.*+?^${}()|[\]\\&]/g, '\\$&') + '([^a-z]|$)');
     if (rx.test(t) && w.length > bestLen) { best = c.id; bestLen = w.length; }
   }
@@ -616,8 +690,10 @@ function parseLine(raw) {
   const tag = s.match(/(?:^|\s)#([\p{L}\w&-]+)/u);
   if (tag) {
     const k = tag[1].toLowerCase();
-    const hit = CATS.find(c => c.id.startsWith(k) || c.name.toLowerCase().startsWith(k) || c.words.includes(k));
-    r.category = hit ? hit.id : 'other';
+    const hit = allCats().find(c => c.id.startsWith(k) || c.name.toLowerCase().startsWith(k) || c.words.includes(k));
+    // An unknown tag becomes a new category of your own when the entry is added.
+    if (hit) r.category = hit.id;
+    else { const name = tag[1].replace(/[-_]+/g, ' '); r.newCat = {id: catId(name), name: name.charAt(0).toUpperCase() + name.slice(1)}; r.category = r.newCat.id; }
     s = s.replace(tag[0], ' ');
   }
   // trial
@@ -658,60 +734,44 @@ function parseLine(raw) {
   return r;
 }
 const validParse = p => p && p.amount > 0 && p.label;
+const catName = p => p.newCat ? p.newCat.name : p.category ? catOf(p.category).name : 'Other';
 
 /* ---------- storage ---------- */
-const LS_KEY = 'outgoing-local-v1';
+// The server applies each change and answers with the whole ledger; the page only ever shows what it returns.
+const BASE_SETTINGS = S.settings;
+let rev = -1;
+function apply(l) {
+  if ((l.rev ?? 0) < rev) return; // an older response finished after a newer one
+  rev = l.rev ?? 0;
+  S.expenses = l.expenses || []; S.subs = l.subs || []; S.settings = {...BASE_SETTINGS, ...(l.settings||{})};
+  fmtCache = {}; render();
+}
 const Store = {
-  db: null,
-  local() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || {expenses:[], subs:[], settings:{}}; } catch { return {expenses:[], subs:[], settings:{}}; } },
-  saveLocal() { try { localStorage.setItem(LS_KEY, JSON.stringify({expenses:S.expenses, subs:S.subs, settings:S.settings})); } catch {} },
-  async put(coll, id, data) {
-    if (this.db) { await this.db.collection(coll).doc(id).set(data); return; }
-    const arr = coll === 'expenses' ? S.expenses : S.subs;
-    const i = arr.findIndex(x => x.id === id);
-    const row = {...data, id};
-    if (i >= 0) arr[i] = row; else arr.push(row);
-    this.saveLocal(); render();
+  async call(method, path, body) {
+    if (!S.ready) throw new Error('not loaded');
+    const r = await fetch('api/' + path, {method, headers:{'content-type':'application/json'}, body: body && JSON.stringify(body)});
+    if (!r.ok) throw new Error(method + ' ' + r.status);
+    apply(await r.json());
   },
-  async del(coll, id) {
-    if (this.db) { await this.db.collection(coll).doc(id).delete(); return; }
-    const arr = coll === 'expenses' ? S.expenses : S.subs;
-    const i = arr.findIndex(x => x.id === id); if (i >= 0) arr.splice(i, 1);
-    this.saveLocal(); render();
+  async load() {
+    const r = await fetch('api/state', {cache:'no-store'});
+    if (!r.ok) throw new Error('load ' + r.status);
+    return r.json();
   },
-  async putSettings(data) {
-    S.settings = {...S.settings, ...data}; fmtCache = {};
-    if (this.db) { await this.db.doc('config/settings').set(S.settings); return; }
-    this.saveLocal(); render();
-  },
+  put(coll, id, data) { return this.call('PUT', `${coll}/${encodeURIComponent(id)}`, data); },
+  del(coll, id) { return this.call('DELETE', `${coll}/${encodeURIComponent(id)}`); },
+  putSettings(data) { return this.call('PUT', 'settings', data); },
 };
 const strip = o => { const {id, ...rest} = o; return rest; };
 
 async function boot() {
   render();
-  let db = null;
-  try { if (window.claude && typeof window.claude.use === 'function') db = await window.claude.use('db'); } catch { db = null; }
-  if (!db) {
-    const l = Store.local();
-    S.expenses = l.expenses || []; S.subs = l.subs || []; S.settings = {...S.settings, ...(l.settings||{})};
-    S.mode = 'local'; S.ready = true; render(); return;
-  }
-  Store.db = db; S.mode = 'db';
-  let got = {e:false, s:false, c:false};
-  const done = () => { if (got.e && got.s && got.c && !S.ready) { S.ready = true; } render(); };
-  const onErr = e => { if (e && (e.code === 'revoked' || e.code === 'not_granted')) { S.mode = 'readonly'; } toast(dbMessage(e)); render(); };
-  db.collection('expenses').onSnapshot(snap => { S.expenses = snap.docs.map(d => ({...d.data(), id:d.id})); got.e = true; done(); }, onErr);
-  db.collection('subs').onSnapshot(snap => { S.subs = snap.docs.map(d => ({...d.data(), id:d.id})); got.s = true; done(); }, onErr);
-  db.doc('config/settings').onSnapshot(snap => { if (snap.exists) { S.settings = {...S.settings, ...snap.data()}; fmtCache = {}; } got.c = true; done(); }, onErr);
+  try { const l = await Store.load(); S.ready = true; S.mode = 'server'; apply(l); }
+  catch { S.mode = 'offline'; render(); }
 }
-function dbMessage(e) {
-  const c = e && e.code;
-  if (c === 'quota_exceeded') return 'Storage is full. Delete old entries to add new ones.';
-  if (c === 'invalid_argument') return 'You can view this ledger but not change it.';
-  if (c === 'resource_exhausted') return 'Too many changes at once. Wait a moment and try again.';
-  if (c === 'revoked' || c === 'not_granted') return 'Saving is turned off for this view.';
-  return 'Couldn’t save. Check your connection and try again.';
-}
+// Pick up changes made in another tab when this one comes back into view.
+document.addEventListener('visibilitychange', () => { if (!document.hidden && S.ready) Store.load().then(apply).catch(() => {}); });
+function dbMessage() { return 'Couldn’t save. Check that the server is running and try again.'; }
 
 /* ---------- toast ---------- */
 let toastTimer, undoFn = null;
@@ -736,7 +796,7 @@ function chipFor(p) {
   if (p.kind === 'sub') bits.push(`<span class="chip">${p.pay === 'manual' ? 'you pay it yourself' : 'charged automatically'}</span>`);
   bits.push(p.amount > 0 ? `<span class="chip num">${moneyIn(p.amount, p.cur)}${p.cur !== dispCur() ? ` ≈ ${money(conv(p.amount, p.cur))}` : ''}</span>` : `<span class="chip miss">amount?</span>`);
   bits.push(p.label ? `<span class="chip">${esc(p.label)}</span>` : `<span class="chip miss">name?</span>`);
-  bits.push(c ? `<span class="chip">${esc(c.name)}</span>` : `<span class="chip miss">category: Other</span>`);
+  bits.push(p.newCat ? `<span class="chip">new category: ${esc(p.newCat.name)}</span>` : c ? `<span class="chip">${esc(c.name)}</span>` : `<span class="chip miss">category: Other</span>`);
   const ds = iso(p.date);
   bits.push(`<span class="chip">${p.kind==='sub' ? (p.trial ? 'first charge ' : 'bills from ') : ''}${ds === iso(today()) ? 'today' : ds === iso(addDays(today(),-1)) ? 'yesterday' : fmtLong(ds)}</span>`);
   return bits.join('');
@@ -754,7 +814,7 @@ function updateReading() {
     box.innerHTML = chipFor(parsed[0]);
   } else {
     const ok = parsed.filter(validParse).length;
-    box.innerHTML = `<table class="batch num"><tbody>${parsed.map(p => `<tr><td>${validParse(p) ? '' : '<span class="chip miss">skip</span>'}</td><td>${esc(p.label||'?')}</td><td>${p.amount>0?moneyIn(p.amount, p.cur):'?'}</td><td>${p.kind==='sub'?CYCLE_ADJ[p.cycle]:'One-off'}</td><td>${esc(p.category?catOf(p.category).name:'Other')}</td><td>${fmtDay(iso(p.date))}</td></tr>`).join('')}</tbody></table><span class="hint">${ok} of ${parsed.length} lines ready.</span>`;
+    box.innerHTML = `<table class="batch num"><tbody>${parsed.map(p => `<tr><td>${validParse(p) ? '' : '<span class="chip miss">skip</span>'}</td><td>${esc(p.label||'?')}</td><td>${p.amount>0?moneyIn(p.amount, p.cur):'?'}</td><td>${p.kind==='sub'?CYCLE_ADJ[p.cycle]:'One-off'}</td><td>${esc(catName(p))}</td><td>${fmtDay(iso(p.date))}</td></tr>`).join('')}</tbody></table><span class="hint">${ok} of ${parsed.length} lines ready.</span>`;
   }
   const ok = parsed.filter(validParse).length;
   $('#addBtn').disabled = ok === 0 || S.mode === 'readonly';
@@ -770,6 +830,8 @@ async function commitParsed() {
   if (!ready.length) return;
   const made = [];
   try {
+    const fresh = new Map(ready.filter(p => p.newCat && !customCats().some(c => c.id === p.newCat.id)).map(p => [p.newCat.id, p.newCat]));
+    if (fresh.size) await Store.putSettings({cats: [...customCats(), ...fresh.values()]});
     for (const p of ready) { const [coll, data] = recordFromParse(p); const id = uid(); await Store.put(coll, id, data); made.push([coll, id, data]); }
   } catch (e) { toast(dbMessage(e)); return; }
   q.value = ''; updateReading();
@@ -780,8 +842,18 @@ async function commitParsed() {
 }
 let flashId = [];
 q.addEventListener('input', updateReading);
-q.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); commitParsed(); } if (e.key === 'Escape') { q.value=''; updateReading(); q.blur(); } });
+q.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); commitParsed(); } if (e.key === 'Escape') { const was = q.value; q.value = ''; updateReading(); q.blur(); if (was.trim()) toast('Cleared the line', async () => { q.value = was; updateReading(); q.focus(); }); } });
+// On phones the add line scrolls away with the page, so a floating button brings it back.
+const fab = $('#fab');
+new IntersectionObserver(([en]) => { fab.hidden = en.isIntersecting; }).observe($('#capture'));
+fab.addEventListener('click', () => { window.scrollTo(0, 0); q.focus(); });
 $('#capture').addEventListener('submit', e => { e.preventDefault(); commitParsed(); });
+const qcur = $('#qcur');
+qcur.innerHTML = CURRENCIES.map(c => `<option value="${c}">${c}</option>`).join('');
+qcur.addEventListener('change', async () => {
+  try { await Store.putSettings({entryCur: qcur.value}); } catch (e) { qcur.value = entryCur(); toast(dbMessage(e)); }
+  updateReading();
+});
 $('#moreBtn').addEventListener('click', () => { const p = parsed[0]; openSheet(null, p ? {...p, date: iso(p.date)} : null); });
 document.addEventListener('keydown', e => {
   if (e.key === '/' && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName) && !$('dialog[open]')) { e.preventDefault(); q.focus(); }
@@ -792,12 +864,33 @@ const sheet = $('#sheet');
 let editing = null; // {coll, id}
 let sheetKind = 'once';
 $('#f-cur').innerHTML = CURRENCIES.map(c => `<option value="${c}">${c}</option>`).join('');
-$('#f-cat').innerHTML = CATS.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('');
 function setKind(k) {
   sheetKind = k;
   $$('#sheet .seg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.kind === k)));
   $$('#sheet [data-only="sub"]').forEach(el => el.hidden = k !== 'sub');
   $('#f-date-lab').textContent = k === 'sub' ? 'First charge' : 'Date';
+  syncSubFields();
+}
+const editedSub = () => editing && editing.coll === 'subs' ? S.subs.find(x => x.id === editing.id) : null;
+// Ask what a new price means only when an existing subscription's price changes; ask for the end date only when it has ended.
+function syncSubFields() {
+  const prev = editedSub(), cur = $('#f-cur').value, amt = parseAmount($('#f-amount').value);
+  const repriced = sheetKind === 'sub' && prev && curOf(prev) === cur && amt > 0 && round(amt, cur) !== +prev.amount;
+  $('#f-price-row').hidden = !repriced;
+  $('#f-from-wrap').hidden = $('#f-why').value !== 'change';
+  const status = $('#f-status').value;
+  $('#f-ended-row').hidden = sheetKind !== 'sub' || status === 'active';
+  $('#f-ended-lab').textContent = status === 'paused' ? 'Paused on' : 'Cancelled on';
+  if (status !== 'active' && !$('#f-ended').value) $('#f-ended').value = iso(today());
+}
+['#f-amount', '#f-cur', '#f-why', '#f-status'].forEach(s => $(s).addEventListener(s === '#f-amount' ? 'input' : 'change', syncSubFields));
+$('#f-cat').addEventListener('change', () => { $('#f-newcat-wrap').hidden = $('#f-cat').value !== '__new'; });
+async function ensureCat(name) {
+  const known = allCats().find(c => c.name.toLowerCase() === name.toLowerCase());
+  if (known) return known.id;
+  const c = {id: catId(name), name};
+  await Store.putSettings({cats: [...customCats(), c]});
+  return c.id;
 }
 $$('#sheet .seg button').forEach(b => b.addEventListener('click', () => setKind(b.dataset.kind)));
 function openSheet(target, prefill) {
@@ -809,17 +902,20 @@ function openSheet(target, prefill) {
     const rec = (target.coll === 'subs' ? S.subs : S.expenses).find(x => x.id === target.id);
     if (!rec) return;
     v = target.coll === 'subs'
-      ? {kind:'sub', label:rec.name, amount:rec.amount, cur:curOf(rec), category:rec.category, date:rec.start, cycle:rec.cycle, status:rec.status||'active', trial:!!rec.trial, pay:rec.pay||'auto', note:rec.note}
+      ? {kind:'sub', label:rec.name, amount:rec.amount, cur:curOf(rec), category:rec.category, date:rec.start, cycle:rec.cycle, status:rec.status||'active', endedOn:rec.endedOn, trial:!!rec.trial, pay:rec.pay||'auto', note:rec.note}
       : {kind:'once', label:rec.label, amount:rec.amount, cur:curOf(rec), category:rec.category, date:rec.date, note:rec.note};
     $('#sheetTitle').textContent = target.coll === 'subs' ? 'Edit subscription' : 'Edit expense';
   } else {
     v = {kind:'once', label:'', amount:'', category:'other', date:iso(today()), cycle:'monthly', status:'active', trial:false, note:'', ...(prefill||{})};
     $('#sheetTitle').textContent = 'New entry';
   }
-  setKind(v.kind === 'sub' ? 'sub' : 'once');
   $('#f-label').value = v.label || '';
   $('#f-amount').value = v.amount || v.amount === 0 ? v.amount : '';
-  $('#f-cat').value = v.category || 'other';
+  const newCat = v.newCat && !allCats().some(c => c.id === v.newCat.id) ? v.newCat : null;
+  $('#f-cat').innerHTML = allCats().map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('') + `<option value="__new">New category…</option>`;
+  $('#f-cat').value = newCat ? '__new' : catOf(v.category).id;
+  $('#f-newcat').value = newCat ? newCat.name : '';
+  $('#f-newcat-wrap').hidden = !newCat;
   $('#f-cur').value = v.cur || entryCur();
   $('#f-date').value = v.date || iso(today());
   $('#f-cycle').value = v.cycle || 'monthly';
@@ -827,24 +923,24 @@ function openSheet(target, prefill) {
   $('#f-trial').checked = !!v.trial;
   $('#f-pay').value = v.pay || 'auto';
   $('#f-note').value = v.note || '';
+  $('#f-why').value = 'change';
+  $('#f-from').value = iso(today());
+  $('#f-ended').value = v.endedOn || '';
+  setKind(v.kind === 'sub' ? 'sub' : 'once');
   sheet.showModal();
   setTimeout(() => $('#f-label').focus(), 30);
 }
 $('#sheetCancel').addEventListener('click', () => sheet.close());
 sheet.addEventListener('click', e => { if (e.target === sheet) sheet.close(); });
+// No confirm step: the toast's Undo puts the entry back.
 $('#delZone').addEventListener('click', async e => {
-  if (e.target.id === 'delBtn') {
-    $('#delZone').innerHTML = `<span class="confirm">Delete for good? <button type="button" class="mini warn" id="delYes">Delete</button><button type="button" class="mini" id="delNo">Keep</button></span>`;
-  } else if (e.target.id === 'delNo') {
-    $('#delZone').innerHTML = `<button type="button" class="danger" id="delBtn">Delete</button>`;
-  } else if (e.target.id === 'delYes' && editing) {
-    const arr = editing.coll === 'subs' ? S.subs : S.expenses;
-    const rec = arr.find(x => x.id === editing.id);
-    const {coll, id} = editing;
-    try { await Store.del(coll, id); } catch (err) { $('#sheetErr').textContent = dbMessage(err); return; }
-    sheet.close();
-    toast('Deleted ' + (rec.name || rec.label), async () => Store.put(coll, id, strip(rec)));
-  }
+  if (e.target.id !== 'delBtn' || !editing) return;
+  const arr = editing.coll === 'subs' ? S.subs : S.expenses;
+  const rec = arr.find(x => x.id === editing.id);
+  const {coll, id} = editing;
+  try { await Store.del(coll, id); } catch (err) { $('#sheetErr').textContent = dbMessage(err); return; }
+  sheet.close();
+  toast('Deleted ' + (rec.name || rec.label), async () => Store.put(coll, id, strip(rec)));
 });
 $('#sheetForm').addEventListener('submit', async e => {
   e.preventDefault();
@@ -854,24 +950,35 @@ $('#sheetForm').addEventListener('submit', async e => {
   if (!label) { $('#sheetErr').textContent = 'Give it a name.'; $('#f-label').focus(); return; }
   if (!(amount > 0)) { $('#sheetErr').textContent = 'Enter an amount above zero.'; $('#f-amount').focus(); return; }
   if (!date) { $('#sheetErr').textContent = 'Pick a date.'; $('#f-date').focus(); return; }
+  const newCatName = $('#f-newcat').value.trim();
+  if ($('#f-cat').value === '__new' && !newCatName) { $('#sheetErr').textContent = 'Name the new category.'; $('#f-newcat').focus(); return; }
   const now = new Date().toISOString();
-  const cat = $('#f-cat').value, note = $('#f-note').value.trim(), cur = $('#f-cur').value;
+  const note = $('#f-note').value.trim(), cur = $('#f-cur').value;
   try {
+    const cat = $('#f-cat').value === '__new' ? await ensureCat(newCatName) : $('#f-cat').value;
     if (sheetKind === 'sub') {
-      let prev = editing && editing.coll === 'subs' ? S.subs.find(x => x.id === editing.id) : null;
-      const status = $('#f-status').value;
+      const prev = editedSub();
+      const status = $('#f-status').value, price = round(amount, cur);
       const rec = prev ? {...strip(prev)} : {history:[], reviewedOn:iso(today()), createdAt:now};
-      Object.assign(rec, {name:label, amount:round(amount, cur), cur, cycle:$('#f-cycle').value, category:cat, start:date, status, trial:$('#f-trial').checked, pay:$('#f-pay').value, note});
+      Object.assign(rec, {name:label, amount:price, cur, cycle:$('#f-cycle').value, category:cat, start:date, status, trial:$('#f-trial').checked, pay:$('#f-pay').value, note});
       if (!rec.payments) rec.payments = {};
       if (prev && curOf(prev) !== cur) rec.history = [];
-      else if (prev && +prev.amount !== round(amount, cur)) {
-        const h = (prev.history || []).slice();
-        if (!h.length) h.push({from: prev.start, amount: +prev.amount});
-        h.push({from: iso(today()), amount: round(amount, cur)});
-        rec.history = h;
+      else if (prev && +prev.amount !== price) {
+        const h = (prev.history || []).slice().sort((a,b) => a.from < b.from ? -1 : 1);
+        if ($('#f-why').value === 'fix') {
+          // A correction replaces the wrong price wherever it was used, including payments recorded at it.
+          const since = h.length ? h[h.length-1].from : '';
+          if (h.length) h[h.length-1] = {...h[h.length-1], amount: price};
+          rec.payments = Object.fromEntries(Object.entries(rec.payments).map(([d, p]) => [d, d >= since && +p.amount === +prev.amount ? {...p, amount: price} : p]));
+          rec.history = h;
+        } else {
+          const from = $('#f-from').value || iso(today());
+          if (!h.length) h.push({from: prev.start, amount: +prev.amount});
+          rec.history = [...h.filter(x => x.from < from), {from, amount: price}];
+        }
       }
-      if (status !== 'active' && (!prev || prev.status !== status)) rec.endedOn = iso(addDays(today(), 0));
       if (status === 'active') delete rec.endedOn;
+      else rec.endedOn = $('#f-ended').value || iso(today());
       const id = prev ? prev.id : uid();
       if (editing && editing.coll === 'expenses') await Store.del('expenses', editing.id);
       flashId = [id];
@@ -898,10 +1005,20 @@ function usedCurrencies() { const set = new Set([dispCur(), entryCur()]); S.expe
 let draftRates = {};
 function drawRates() {
   const disp = $('#p-cur').value;
-  const list = [...new Set([...usedCurrencies(), disp, $('#p-entry').value])].filter(c => c !== disp && CURRENCIES.includes(c));
-  $('#p-rates-lab').textContent = 'Exchange rates';
+  const list = [...new Set([...usedCurrencies(), disp])].filter(c => c !== disp && CURRENCIES.includes(c));
+  const auto = $('#p-auto').checked;
   $('#p-rates-reset').textContent = `Reset to the rates from ${RATES_DATE}`;
-  $('#p-rates').innerHTML = list.length ? list.map(c => { const per = (draftRates[c] || DEFAULT_RATES[c]) / (draftRates[disp] || DEFAULT_RATES[disp]); const big = per >= 1; const v = big ? per : 1 / per; return `<label>1 ${big ? disp : c} =<input data-cur="${c}" data-dir="${big ? 'per' : 'inv'}" inputmode="decimal" value="${+v.toPrecision(6)}" aria-label="${big ? c + ' per 1 ' + disp : disp + ' per 1 ' + c}"> ${big ? c : disp}</label>`; }).join('') : `<span class="sub-h" style="margin:0">All your entries are in ${disp}, so nothing needs converting.</span>`;
+  $('#p-rates-reset').hidden = auto;
+  $('#p-rates').innerHTML = list.length ? list.map(c => { const per = (draftRates[c] || DEFAULT_RATES[c]) / (draftRates[disp] || DEFAULT_RATES[disp]); const big = per >= 1; const v = big ? per : 1 / per; return `<label>1 ${big ? disp : c} =<input data-cur="${c}" data-dir="${big ? 'per' : 'inv'}" inputmode="decimal" value="${+v.toPrecision(6)}" ${auto ? 'readonly' : ''} aria-label="${big ? c + ' per 1 ' + disp : disp + ' per 1 ' + c}"> ${big ? c : disp}</label>`; }).join('') : `<span class="sub-h" style="margin:0">All your entries are in ${disp}, so nothing needs converting.</span>`;
+  const fetched = (S.settings.rateLog || []).filter(e => e.source === 'auto').pop();
+  $('#p-rates-note').textContent = (auto ? (fetched ? `Last updated ${fmtDay(fetched.on)} ${fetched.on.slice(0, 4)}. ` : 'They update once you save. ') + 'Turn this off to type your own. ' : '') + 'Past entries keep the rates of the day they happened.';
+}
+$('#p-auto').addEventListener('change', () => { if ($('#p-auto').checked) draftRates = {...DEFAULT_RATES, ...(S.settings.rates || {})}; drawRates(); });
+function drawCats() {
+  const own = customCats();
+  $('#p-cats').innerHTML = own.length
+    ? own.map(c => `<input data-cat="${esc(c.id)}" value="${esc(c.name)}" aria-label="Name of the ${esc(c.name)} category">`).join('') + `<p class="quiet" style="grid-column:1/-1">Clear a name to remove that category. Its entries move to Other.</p>`
+    : `<p class="quiet" style="grid-column:1/-1">Type <b>#name</b> in the line above, or pick “New category…” when editing an entry, to add your own.</p>`;
 }
 $('#p-rates').addEventListener('input', e => {
   const c = e.target.dataset.cur; if (!c) return;
@@ -910,29 +1027,59 @@ $('#p-rates').addEventListener('input', e => {
   if (v > 0) draftRates[c] = e.target.dataset.dir === 'per' ? base * v : base / v;
 });
 $('#p-rates-reset').addEventListener('click', () => { draftRates = {...DEFAULT_RATES}; drawRates(); });
-$('#p-cur').addEventListener('change', () => { drawRates(); $('#p-budget-lab').textContent = `Monthly budget, in ${$('#p-cur').value}`; });
-$('#p-entry').addEventListener('change', drawRates);
+// Amounts in Preferences are in the display currency, so switching it converts what's typed instead of just relabelling it.
+const MONEY_PREFS = ['#p-budget-subs', '#p-budget-once', '#p-hourly'];
+let prefsCur = null;
+function labelMoneyPrefs() { $$('#prefs [data-cur-label]').forEach(l => { l.textContent = `${l.dataset.curLabel}, in ${prefsCur}`; }); }
+$('#p-cur').addEventListener('change', () => {
+  const to = $('#p-cur').value;
+  for (const s of MONEY_PREFS) { const v = parseAmount($(s).value); if (v > 0) $(s).value = round(v / (draftRates[prefsCur] || rateOf(prefsCur)) * (draftRates[to] || rateOf(to)), to); }
+  prefsCur = to; labelMoneyPrefs(); drawRates();
+});
 $('#openSettings').addEventListener('click', () => {
   draftRates = {...DEFAULT_RATES, ...(S.settings.rates || {})};
   $('#p-cur').innerHTML = curOptions(dispCur());
-  $('#p-entry').innerHTML = curOptions(entryCur());
   const bc = S.settings.budgetCur || dispCur();
-  $('#p-budget').value = S.settings.budget ? +conv(S.settings.budget, bc).toFixed(curDigits()) : '';
-  $('#p-hourly').value = S.settings.hourly ? +conv(S.settings.hourly, bc).toFixed(curDigits()) : '';
-  $('#p-budget-lab').textContent = `Monthly budget, in ${dispCur()}`;
-  drawRates();
+  const inDisp = v => +v ? +conv(+v, bc).toFixed(curDigits()) : '';
+  $('#p-budget-subs').value = inDisp(S.settings.budgetSubs);
+  $('#p-budget-once').value = inDisp(S.settings.budgetOnce);
+  $('#p-hourly').value = inDisp(S.settings.hourly);
+  prefsCur = dispCur(); labelMoneyPrefs();
+  $('#p-auto').checked = S.settings.autoRates !== false;
+  drawRates(); drawCats();
   $('#clearEx').hidden = !hasExamples();
+  $('#p-ntfy').value = S.settings.ntfyUrl || '';
+  $('#p-ntfy-token').value = S.settings.ntfyToken || '';
   $('#prefsErr').textContent = '';
   prefs.showModal();
 });
 $('#prefsCancel').addEventListener('click', () => prefs.close());
+// "ntfy.sh/topic" is how topics are usually written, so the scheme is optional.
+const topicUrl = s => { s = s.trim(); return !s || /^https?:\/\//i.test(s) ? s : 'https://' + s; };
+$('#p-ntfy-test').addEventListener('click', async () => {
+  const url = topicUrl($('#p-ntfy').value);
+  if (!url) { $('#prefsErr').textContent = 'Type your ntfy topic address first.'; $('#p-ntfy').focus(); return; }
+  $('#prefsErr').textContent = '';
+  try {
+    const r = await fetch('api/ntfy/test', {method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify({url, token: $('#p-ntfy-token').value.trim()})});
+    if (r.ok) toast('Test sent. Check your phone'); else $('#prefsErr').textContent = `The test didn’t go through: ${await r.text()}`;
+  } catch { $('#prefsErr').textContent = dbMessage(); }
+});
 prefs.addEventListener('click', e => { if (e.target === prefs) prefs.close(); });
 $('#prefsForm').addEventListener('submit', async e => {
   e.preventDefault();
   try {
     const legacy = S.settings.legacyCur || (S.expenses.some(e => !e.cur) || S.subs.some(x => !x.cur) ? dispCur() : undefined);
-    const next = {currency:$('#p-cur').value, entryCur:$('#p-entry').value, budget: parseAmount($('#p-budget').value) || 0, hourly: parseAmount($('#p-hourly').value) || 0, budgetCur:$('#p-cur').value, rates: draftRates};
+    const auto = $('#p-auto').checked;
+    const next = {currency:$('#p-cur').value, budgetSubs: parseAmount($('#p-budget-subs').value) || 0, budgetOnce: parseAmount($('#p-budget-once').value) || 0, hourly: parseAmount($('#p-hourly').value) || 0, budgetCur:$('#p-cur').value, autoRates: auto,
+      cats: $$('#p-cats input').map(i => ({id: i.dataset.cat, name: i.value.trim()})).filter(c => c.name)};
+    // Only typed-in rates are sent; the server logs them as today's rates.
+    if (!auto && CURRENCIES.some(c => Math.abs(draftRates[c] / rateOf(c) - 1) > 1e-9)) next.rates = draftRates;
     if (legacy) next.legacyCur = legacy;
+    const ntfyUrl = topicUrl($('#p-ntfy').value);
+    if (ntfyUrl && !/^https?:\/\/[^/]+\/./.test(ntfyUrl)) { $('#prefsErr').textContent = 'The ntfy address needs a topic, like ntfy.sh/your-topic.'; $('#p-ntfy').focus(); return; }
+    // The server sends reminders on your local dates, so it needs your time zone.
+    Object.assign(next, {ntfyUrl, ntfyToken: $('#p-ntfy-token').value.trim(), tz: Intl.DateTimeFormat().resolvedOptions().timeZone});
     await Store.putSettings(next); fmtIn = {};
     prefs.close(); toast('Preferences saved');
   } catch (err) { $('#prefsErr').textContent = dbMessage(err); }
@@ -949,39 +1096,71 @@ $('#clearEx').addEventListener('click', async () => { prefs.close(); await clear
 $('#exportBtn').addEventListener('click', async () => {
   const dc = dispCur();
   const rows = [['type','date','name','amount','currency',`amount in ${dc}`,'category','cycle','status','note']];
-  for (const e of S.expenses) rows.push(['one-off', e.date, e.label, e.amount, curOf(e), round(conv(e.amount, curOf(e))), catOf(e.category).name, '', '', e.note||'']);
+  for (const e of S.expenses) rows.push(['one-off', e.date, e.label, e.amount, curOf(e), round(conv(e.amount, curOf(e), e.date)), catOf(e.category).name, '', '', e.note||'']);
   for (const s of S.subs) rows.push(['subscription', s.start, s.name, s.amount, curOf(s), round(conv(s.amount, curOf(s))), catOf(s.category).name, s.cycle, s.status||'active', s.note||'']);
   const csv = rows.map(r => r.map(v => { const t = String(v ?? ''); return /[",\n]/.test(t) ? '"' + t.replace(/"/g,'""') + '"' : t; }).join(',')).join('\n');
-  try {
-    const dl = await window.claude?.use?.('downloads');
-    if (!dl) { $('#prefsErr').textContent = 'Downloads aren’t available in this view.'; return; }
-    await dl.save({filename:`outgoing-${iso(today())}.csv`, data:csv});
-  } catch (e) { if (e && e.code !== 'declined' && e.code !== 'cancelled') $('#prefsErr').textContent = 'The file wasn’t saved.'; }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+  a.download = `expendial-${iso(today())}.csv`;
+  a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 });
 
 /* ---------- routing ---------- */
 const VIEWS = ['ledger','subscriptions','calendar','entries'];
 function route() { const h = location.hash.slice(1); S.view = VIEWS.includes(h) ? h : 'ledger'; render(); }
 window.addEventListener('hashchange', route);
-try { const v = localStorage.getItem('outgoing-view'); if (!location.hash && VIEWS.includes(v)) S.view = v; } catch {}
+try { const v = localStorage.getItem('expendial-view'); if (!location.hash && VIEWS.includes(v)) S.view = v; } catch {}
 if (VIEWS.includes(location.hash.slice(1))) S.view = location.hash.slice(1);
+$('nav.views').addEventListener('click', e => {
+  if (!e.target.closest('a[data-v="entries"]') || !S.filter.auto) return;
+  S.filter = freshFilter();
+  if (S.view === 'entries') render();
+});
+function goTo(view) { if (S.view === view) render(); else location.hash = view; }
+
+/* ---------- theme ---------- */
+const THEMES = ['auto', 'light', 'dark'];
+const themeNow = () => document.documentElement.dataset.theme || 'auto';
+const themeLabel = () => { $('#themeBtn').textContent = `Theme: ${themeNow()}`; };
+$('#themeBtn').addEventListener('click', () => {
+  const t = THEMES[(THEMES.indexOf(themeNow()) + 1) % THEMES.length];
+  if (t === 'auto') delete document.documentElement.dataset.theme; else document.documentElement.dataset.theme = t;
+  try { localStorage.setItem('expendial-theme', t); } catch {}
+  themeLabel();
+});
+themeLabel();
+
+/* ---------- chart tooltip ---------- */
+const tip = $('#tip');
+function placeTip(e) {
+  const w = tip.offsetWidth, h = tip.offsetHeight;
+  tip.style.left = Math.min(innerWidth - w - 8, Math.max(8, e.clientX - w / 2)) + 'px';
+  tip.style.top = (e.clientY - h - 14 < 8 ? e.clientY + 18 : e.clientY - h - 14) + 'px';
+}
+document.addEventListener('pointerover', e => {
+  const t = e.pointerType !== 'touch' && e.target.closest && e.target.closest('[data-tip]');
+  tip.hidden = !t;
+  if (t) { tip.textContent = t.dataset.tip; placeTip(e); }
+});
+document.addEventListener('pointermove', e => { if (!tip.hidden) placeTip(e); });
 
 /* ---------- rendering ---------- */
 function render() {
+  tip.hidden = true;
   $$('nav.views a').forEach(a => a.setAttribute('aria-current', a.dataset.v === S.view ? 'page' : 'false'));
   VIEWS.forEach(v => $('#v-' + v).hidden = v !== S.view);
-  try { localStorage.setItem('outgoing-view', S.view); } catch {}
+  try { localStorage.setItem('expendial-view', S.view); } catch {}
   renderNotice();
   const el = $('#v-' + S.view);
-  if (!S.ready) { el.innerHTML = `<div class="empty"><strong>Opening your ledger</strong>Your expenses and subscriptions will appear here in a moment.</div>`; return; }
+  if (!S.ready) { el.innerHTML = S.mode === 'offline' ? `<div class="empty"><strong>Can’t reach the server</strong>Start it with <code>docker compose up -d</code>, then reload this page.</div>` : `<div class="empty"><strong>Opening your ledger</strong>Your expenses and subscriptions will appear here in a moment.</div>`; return; }
   ({ledger: renderLedger, subscriptions: renderSubs, calendar: renderCalendar, entries: renderEntries})[S.view](el);
   if (flashId.length) { flashId.forEach(id => $$(`[data-id^="${id}"]`).forEach(n => n.classList.add('stamp'))); flashId = []; }
+  $('#qcur').value = entryCur();
   updateReading();
 }
 function renderNotice() {
   const n = $('#notice'); const parts = [];
   if (S.ready && hasExamples()) parts.push(`<div class="notice"><span>These are example entries so you can see how everything works. Your own entries stay when you remove them.</span><button type="button" class="mini" data-act="clear-ex">Remove examples</button></div>`);
-  if (S.mode === 'local') parts.push(`<div class="notice"><span>Saving in this browser only. Open this page from your Claude account to keep your ledger synced.</span></div>`);
   if (S.mode === 'readonly') parts.push(`<div class="notice"><span>This ledger is read-only for you.</span></div>`);
   n.innerHTML = parts.join('');
 }
@@ -991,15 +1170,20 @@ document.addEventListener('click', e => {
   if (act === 'clear-ex') clearExamples();
   if (act === 'edit-sub') openSheet({coll:'subs', id});
   if (act === 'edit-once') openSheet({coll:'expenses', id});
-  if (act === 'month') { const d = S.month; S.month = new Date(d.getFullYear(), d.getMonth() + (+b.dataset.d), 1); render(); }
-  if (act === 'cal') { const d = S.calMonth; S.calMonth = new Date(d.getFullYear(), d.getMonth() + (+b.dataset.d), 1); S.calSel = null; render(); }
-  if (act === 'day') { S.calSel = b.dataset.date; render(); }
+  if (act === 'home') { e.preventDefault(); S.month = today(); S.calSel = null; window.scrollTo(0, 0); goTo('ledger'); }
+  // Month and Calendar share one month.
+  if (act === 'month') { const d = S.month; S.month = new Date(d.getFullYear(), d.getMonth() + (+b.dataset.d), 1); S.calSel = null; render(); }
+  if (act === 'month-now') { S.month = today(); S.calSel = null; render(); }
+  if (act === 'day') { const ds = b.dataset.date; S.calSel = ds; S.scrollDay = true; render(); const c = $(`.cal .cell[data-date="${ds}"]`); if (c) c.focus({preventScroll: true}); }
+  if (act === 'chart-day') { S.calSel = b.dataset.date; S.month = fromISO(b.dataset.date); S.scrollDay = true; goTo('calendar'); }
+  if (act === 'filter-entries') { e.preventDefault(); S.filter = {...freshFilter(), cat: b.dataset.cat || '', month: b.dataset.month || '', auto: true}; goTo('entries'); }
+  if (act === 'more-entries') { S.filter.limit += PAGE; render(); }
   if (act === 'add-on') { const ds = b.dataset.date; q.value = (q.value.trim() ? q.value.trim() + ' ' : '') + fmtDay(ds).toLowerCase(); updateReading(); q.focus(); q.setSelectionRange(0,0); }
   if (act === 'review') subAction(id, 'review');
   if (act === 'pause') subAction(id, 'paused');
   if (act === 'cancel') subAction(id, 'cancelled');
   if (act === 'resume') subAction(id, 'active');
-  if (act === 'type') { S.filter.type = b.dataset.v; render(); }
+  if (act === 'type') { Object.assign(S.filter, {type: b.dataset.v, auto: false, limit: PAGE}); render(); }
   if (act === 'mark-paid') { e.stopPropagation(); setPaid(id, [b.dataset.date], true); }
   if (act === 'unpay') { e.stopPropagation(); setPaid(id, [b.dataset.date], false); }
   if (act === 'pay-ahead') openAhead(id);
@@ -1073,7 +1257,7 @@ async function subAction(id, what) {
 
 function emptyBlock(title, body) { return `<div class="empty"><strong>${title}</strong>${body}</div>`; }
 const monthLabel = d => `${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
-function monthNav(d, act) { return `<div class="monthnav"><button type="button" data-act="${act}" data-d="-1" aria-label="Previous month">‹</button><strong>${monthLabel(d)}</strong><button type="button" data-act="${act}" data-d="1" aria-label="Next month">›</button></div>`; }
+function monthNav(d) { return `<div class="monthnav"><button type="button" data-act="month" data-d="-1" aria-label="Previous month">‹</button><strong>${monthLabel(d)}</strong><button type="button" data-act="month" data-d="1" aria-label="Next month">›</button>${ymKey(d) !== ymKey(today()) ? `<button type="button" class="mini" data-act="month-now">This month</button>` : ''}</div>`; }
 
 /* --- Month view --- */
 function renderLedger(el) {
@@ -1091,7 +1275,7 @@ function renderLedger(el) {
   const diff = spent - prevToPoint;
   const name = MONTHS[m];
   if (!S.expenses.length && !S.subs.length) {
-    el.innerHTML = `${monthNav(S.month,'month')}${emptyBlock('Nothing here yet', `Type your first expense in the line above, like <code>coffee 4.50</code>, or a subscription like <code>netflix 15.49 monthly</code>, then press Enter.`)}`;
+    el.innerHTML = `${monthNav(S.month)}${emptyBlock('Nothing here yet', `Type your first expense in the line above, like <code>coffee 4.50</code>, or a subscription like <code>netflix 15.49 monthly</code>, then press Enter.`)}`;
     return;
   }
   let s1, s2 = [];
@@ -1105,19 +1289,20 @@ function renderLedger(el) {
     if (scheduled > 0) s2.push(`<b>${money(scheduled)}</b> is still to pay${overdue > 0 ? `, ${money(overdue)} of it overdue` : ''}.`);
     if (ahead > 0) s2.push(`<b>${money(ahead)}</b> went to paying subscriptions ahead of time.`);
   }
-  // budget
-  let budget = '';
-  const B = conv(+S.settings.budget || 0, S.settings.budgetCur || dispCur());
-  if (B > 0 && !isFuture) {
-    const total = spent + (isCurrent ? scheduled : 0);
-    const pct = Math.min(100, spent / B * 100);
-    const pace = isCurrent ? (t.getDate() / dim(y, m)) * 100 : 100;
-    const left = B - total;
-    budget = `<div><h2>Budget</h2>
-      <div class="meter" role="img" aria-label="${Math.round(spent/B*100)}% of budget used"><i class="${spent > B ? 'over' : ''}" style="width:${pct}%"></i>${isCurrent ? `<b style="left:calc(${pace}% - 1px)" title="Where an even pace would be today"></b>` : ''}</div>
-      <div class="meter-legend num"><span>${money(spent)} of ${money(B)}${isCurrent ? `<span class="pace-key"><i></i>even pace today</span>` : ''}</span><span>${left >= 0 ? `${money(left)} left${isCurrent && scheduled ? ' after scheduled charges' : ''}` : `${money(-left)} over`}</span></div>
-</div>`;
-  }
+  // budgets: one for subscriptions, one for everything else; each shows only when set
+  const bc = S.settings.budgetCur || dispCur();
+  // Subscriptions bill on fixed days, so only everyday spending gets the even-pace mark.
+  const meter = (title, B, kind, withPace) => {
+    if (!(B > 0)) return '';
+    const done = sum(past.filter(x => x.kind === kind)), due = isCurrent ? sum(future.filter(x => x.kind === kind)) : 0;
+    const pct = Math.min(100, done / B * 100), left = B - done - due;
+    const pace = isCurrent && withPace ? (t.getDate() / dim(y, m)) * 100 : null;
+    return `<div><p class="budget-h">${title}</p>
+      <div class="meter" role="img" aria-label="${title}: ${Math.round(done/B*100)}% of budget used"><i class="${done > B ? 'over' : ''}" style="width:${pct}%"></i>${pace !== null ? `<b style="left:calc(${pace}% - 1px)" title="Where an even pace would be today"></b>` : ''}</div>
+      <div class="meter-legend num"><span>${money(done)} of ${money(B)}${pace !== null ? `<span class="pace-key"><i></i>even pace today</span>` : ''}</span><span>${left >= 0 ? `${money(left)} left${due ? ' after what’s still to pay' : ''}` : `${money(-left)} over`}</span></div></div>`;
+  };
+  const meters = isFuture ? '' : meter('Subscriptions', conv(+S.settings.budgetSubs || 0, bc), 'sub', false) + meter('Everything else', conv(+S.settings.budgetOnce || 0, bc), 'once', true);
+  const budget = meters ? `<div><h2>Budgets</h2><div class="budgets">${meters}</div></div>` : '';
   // daily chart
   const days = dim(y, m);
   const daily = Array.from({length: days}, () => ({once:0, sub:0, fut:0}));
@@ -1135,19 +1320,23 @@ function renderLedger(el) {
     const dayNum = i + 1;
     if (showDay(dayNum, days, W)) svg += `<text x="${(i*bw + bw/2).toFixed(1)}" y="${H - 6}" text-anchor="middle">${dayNum}</text>`;
     if (isCurrent && dayNum === t.getDate()) svg += `<line x1="${(i*bw+bw/2).toFixed(1)}" x2="${(i*bw+bw/2).toFixed(1)}" y1="${H-padB+2}" y2="${H-padB+6}" stroke="var(--ink)" stroke-width="2"/>`;
+    // A full-height hit area per day, drawn over the bars: hover shows the split, click opens the day in Calendar.
+    const ds = iso(new Date(y, m, dayNum));
+    const tipText = [fmtLong(ds), d.once && `One-off ${money(d.once)}`, d.sub && `Subscriptions ${money(d.sub)}`, d.fut && `Still to pay ${money(d.fut)}`].filter(Boolean);
+    svg += `<rect class="hit" x="${(i*bw).toFixed(1)}" y="0" width="${bw.toFixed(1)}" height="${H - padB}" data-act="chart-day" data-date="${ds}" data-tip="${esc((tipText.length > 1 ? tipText : [...tipText, 'Nothing spent']).join('\n'))}"/>`;
   });
   svg += `</svg>`;
   // categories
   const byCat = {};
-  for (const x of past) byCat[x.category||'other'] = (byCat[x.category||'other'] || 0) + x.amount;
+  for (const x of past) { const k = catOf(x.category).id; byCat[k] = (byCat[k] || 0) + x.amount; }
   const cats = Object.entries(byCat).sort((a,b) => b[1]-a[1]);
-  const catsHtml = cats.length ? `<ul class="cats">${cats.map(([id, v]) => { const c = catOf(id); const p = spent ? v/spent*100 : 0; return `<li><span class="nm">${esc(c.name)}</span><span class="num">${money(v)}<span class="pct">${Math.round(p)}%</span></span><span class="track"><i style="width:${p}%;background:var(--ink)"></i></span></li>`; }).join('')}</ul>` : `<p class="quiet">No spending recorded for ${name}.</p>`;
+  const catsHtml = cats.length ? `<ul class="cats">${cats.map(([id, v]) => { const c = catOf(id); const p = spent ? v/spent*100 : 0; return `<li class="click" data-act="filter-entries" data-cat="${esc(id)}" data-month="${ymKey(from)}" tabindex="0" role="button" aria-label="See ${esc(c.name)} entries in ${name}"><span class="nm">${esc(c.name)}</span><span class="num">${money(v)}<span class="pct">${Math.round(p)}%</span></span><span class="track"><i style="width:${p}%;background:var(--ink)"></i></span></li>`; }).join('')}</ul>` : `<p class="quiet">No spending recorded for ${name}.</p>`;
   // recent + biggest
   const recent = all.slice(0, 9);
   const biggest = past.filter(x => x.kind === 'once').sort((a,b) => b.amount - a.amount)[0];
   el.innerHTML = `
     <div>
-      ${monthNav(S.month, 'month')}
+      ${monthNav(S.month)}
       <p class="statement">${s1}</p>
       ${s2.length ? `<p class="statement-2">${s2.join(' ')}</p>` : ''}
     </div>
@@ -1161,7 +1350,7 @@ function renderLedger(el) {
       <div>
         <h2>Latest in ${name}</h2>
         ${recent.length ? `<ul class="rows num">${recent.map(rowHtml).join('')}</ul>` : `<p class="quiet">Nothing logged this month.</p>`}
-        ${all.length > recent.length ? `<p style="margin:10px 0 0"><a href="#entries" class="ghost" style="padding:0">See all ${all.length} entries in ${name}</a></p>` : ''}
+        ${all.length > recent.length ? `<p style="margin:10px 0 0"><a href="#entries" class="ghost" style="padding:0" data-act="filter-entries" data-month="${ymKey(from)}">See all ${all.length} entries in ${name}</a></p>` : ''}
       </div>
       <div>
         <h2>Where it went</h2>
@@ -1169,7 +1358,6 @@ function renderLedger(el) {
         ${biggest ? `<p class="quiet" style="margin-top:16px">Biggest single expense: ${esc(biggest.label)}, ${money(biggest.amount)} on ${fmtDay(biggest.date)}.</p>` : ''}
       </div>
     </div>`;
-  $$('#v-ledger a[href="#entries"]').forEach(a => a.addEventListener('click', () => { S.filter.month = ymKey(from); }));
 }
 // Axis day labels: every 5th day (every 10th on narrow charts), the first and last, never two crowding at the end.
 function showDay(d, days, W) { const step = W < 520 ? 10 : 5; return d === 1 || d === days || (d % step === 0 && days - d >= (W < 520 ? 4 : 3)); }
@@ -1235,7 +1423,7 @@ function renderSubs(el) {
     list.sort((a,b) => b.amount - a.amount).forEach(c => {
       const r = 4 + Math.sqrt(c.amount / maxAmt) * 12; stack -= r; if (stack - r < 16) return;
       const done = c.paid;
-      rh += `<circle cx="${xd(+d)}" cy="${stack}" r="${r}" fill="${done ? 'var(--carbon)' : 'var(--sheet)'}" stroke="var(--carbon)" stroke-width="1.5"><title>${esc(c.sub.name)}: ${esc(money(c.amount))} on the ${ord(+d)}</title></circle>`;
+      rh += `<circle cx="${xd(+d)}" cy="${stack}" r="${r}" fill="${done ? 'var(--carbon)' : 'var(--sheet)'}" stroke="var(--carbon)" stroke-width="1.5" data-act="edit-sub" data-id="${esc(c.sub.id)}" data-tip="${esc(`${c.sub.name}: ${money(c.amount)} on the ${ord(+d)}\n${done ? 'Paid' : 'Still to pay'}`)}"/>`;
       stack -= r + 2;
     });
   }
@@ -1251,7 +1439,7 @@ function renderSubs(el) {
     const pc = priceChange(s);
     if (pc && pc.to > pc.from && daysBetween(fromISO(pc.on), t) <= 120) flags.push({tone:'stop', html:`<p><b>${esc(s.name)}</b> went up from ${moneyIn(pc.from, curOf(s))} to ${moneyIn(pc.to, curOf(s))} on ${fmtDay(pc.on)}, ${money(conv((pc.to - pc.from) * (12 * PER_MONTH[s.cycle]), curOf(s)))} more a year.</p>`, id:s.id, acts:['review','cancel']});
   }
-  const byCat = {}; for (const s of live) (byCat[s.category] = byCat[s.category] || []).push(s);
+  const byCat = {}; for (const s of live) { const k = catOf(s.category).id; (byCat[k] = byCat[k] || []).push(s); }
   for (const [cid, list] of Object.entries(byCat)) if (list.length >= 3 || (cid === 'entertainment' && list.length >= 2)) {
     const tot = list.reduce((a,s) => a + monthlyEq(s), 0);
     flags.push({tone:'info', html:`<p>You pay for ${list.length} ${esc(catOf(cid).name.toLowerCase())} services (${list.map(s => esc(s.name)).join(', ')}), ${money(tot)} a month together. Rotating them one at a time could save ${money(tot - Math.max(...list.map(monthlyEq)))} a month.</p>`});
@@ -1267,15 +1455,15 @@ function renderSubs(el) {
     return `<tr data-id="${esc(s.id)}">
       <td class="nm"><button type="button" data-act="edit-sub" data-id="${esc(s.id)}">${esc(s.name)}</button>
         <span class="small">${esc(catOf(s.category).name)} · ${Math.round(share)}% of your subscriptions</span></td>
-      <td class="num">${moneyIn(s.amount, curOf(s))}<span class="small">a ${CYCLE_NAME[s.cycle]}${curOf(s) !== dispCur() ? `, about ${money(conv(s.amount, curOf(s)))}` : ''}${pc && pc.to > pc.from ? ` <span class="pill up">up ${moneyIn(pc.to-pc.from, curOf(s))}</span>` : ''}</span></td>
-      <td class="num">${money(monthlyEq(s))}<span class="small">${money(monthlyEq(s)*12)} a year${H ? `, ${(monthlyEq(s)*12/H).toFixed(1)} h of work` : ''}</span></td>
-      <td class="num">${money(p.total)}<span class="small">${p.count} ${p.count === 1 ? 'charge' : 'charges'}</span></td>
-      <td class="num">${nc ? `${trial ? '<span class="pill trial">trial</span> ' : dd < 0 ? '<span class="pill up">overdue</span> ' : dd <= 3 ? '<span class="pill due">soon</span> ' : ''}${fmtDay(nc.date)}<span class="small">${dd < 0 ? `${-dd} ${dd === -1 ? 'day' : 'days'} late` : dd === 0 ? 'today' : dd === 1 ? 'tomorrow' : `in ${dd} days`}</span>${pt ? `<span class="small">paid through ${fmtDay(pt.date)}</span>` : ''}<span class="small">${s.pay === 'manual' ? 'you pay it' : 'automatic'}</span>` : '–'}</td>
-      <td><div class="rowacts"><button type="button" class="mini" data-act="pay-ahead" data-id="${esc(s.id)}">Pay ahead</button><button type="button" class="mini" data-act="pause" data-id="${esc(s.id)}">Pause</button><button type="button" class="mini warn" data-act="cancel" data-id="${esc(s.id)}">Cancel</button></div>
+      <td class="num" data-label="Price">${moneyIn(s.amount, curOf(s))}<span class="small">a ${CYCLE_NAME[s.cycle]}${curOf(s) !== dispCur() ? `, about ${money(conv(s.amount, curOf(s)))}` : ''}${pc && pc.to > pc.from ? ` <span class="pill up">up ${moneyIn(pc.to-pc.from, curOf(s))}</span>` : ''}</span></td>
+      <td class="num" data-label="Per month">${money(monthlyEq(s))}<span class="small">${money(monthlyEq(s)*12)} a year${H ? `, ${(monthlyEq(s)*12/H).toFixed(1)} h of work` : ''}</span></td>
+      <td class="num" data-label="Paid so far">${money(p.total)}<span class="small">${p.count} ${p.count === 1 ? 'charge' : 'charges'}</span></td>
+      <td class="num" data-label="Next charge">${nc ? `${trial ? '<span class="pill trial">trial</span> ' : dd < 0 ? '<span class="pill up">overdue</span> ' : dd <= 3 ? '<span class="pill due">soon</span> ' : ''}${fmtDay(nc.date)}<span class="small">${dd < 0 ? `${-dd} ${dd === -1 ? 'day' : 'days'} late` : dd === 0 ? 'today' : dd === 1 ? 'tomorrow' : `in ${dd} days`}</span>${pt ? `<span class="small">paid through ${fmtDay(pt.date)}</span>` : ''}<span class="small">${s.pay === 'manual' ? 'you pay it' : 'automatic'}</span>` : '–'}</td>
+      <td class="acts"><div class="rowacts"><button type="button" class="mini" data-act="pay-ahead" data-id="${esc(s.id)}">Pay ahead</button><button type="button" class="mini" data-act="pause" data-id="${esc(s.id)}">Pause</button><button type="button" class="mini warn" data-act="cancel" data-id="${esc(s.id)}">Cancel</button></div>
         <span class="small" style="margin-top:6px">Cancel today, keep ${money(leftThisYear(s))} by Dec 31</span></td>
     </tr>`;
   }).join('');
-  const endedRows = ended.map(s => { const p = paidSoFar(s); return `<tr class="off" data-id="${esc(s.id)}"><td class="nm"><button type="button" data-act="edit-sub" data-id="${esc(s.id)}">${esc(s.name)}</button><span class="small">${s.status === 'paused' ? 'Paused' : 'Cancelled'} ${s.endedOn ? 'on ' + fmtDay(s.endedOn) : ''}</span></td><td class="num">${moneyIn(s.amount, curOf(s))}<span class="small">a ${CYCLE_NAME[s.cycle]}${curOf(s) !== dispCur() ? `, about ${money(conv(s.amount, curOf(s)))}` : ''}</span></td><td class="num">${money(monthlyEq(s))}<span class="small">saved each month</span></td><td class="num">${money(p.total)}<span class="small">paid in total</span></td><td>–</td><td><div class="rowacts"><button type="button" class="mini" data-act="resume" data-id="${esc(s.id)}">Resume</button></div></td></tr>`; }).join('');
+  const endedRows = ended.map(s => { const p = paidSoFar(s); return `<tr class="off" data-id="${esc(s.id)}"><td class="nm"><button type="button" data-act="edit-sub" data-id="${esc(s.id)}">${esc(s.name)}</button><span class="small">${s.status === 'paused' ? 'Paused' : 'Cancelled'} ${s.endedOn ? 'on ' + fmtDay(s.endedOn) : ''}</span></td><td class="num" data-label="Price">${moneyIn(s.amount, curOf(s))}<span class="small">a ${CYCLE_NAME[s.cycle]}${curOf(s) !== dispCur() ? `, about ${money(conv(s.amount, curOf(s)))}` : ''}</span></td><td class="num" data-label="Per month">${money(monthlyEq(s))}<span class="small">saved each month</span></td><td class="num" data-label="Paid so far">${money(p.total)}<span class="small">paid in total</span></td><td data-label="Next charge">–</td><td class="acts"><div class="rowacts"><button type="button" class="mini" data-act="resume" data-id="${esc(s.id)}">Resume</button></div></td></tr>`; }).join('');
   const savedMonthly = ended.reduce((a,s) => a + monthlyEq(s), 0);
   el.innerHTML = `
     <div>
@@ -1288,18 +1476,10 @@ function renderSubs(el) {
         savedMonthly ? `Cancelled ones save you ${money(savedMonthly)} a month.` : '',
       ].filter(Boolean).join(' ')}</p>
     </div>
-    <div>
-      <h2>Payment queue</h2>
-      ${queue.length ? `<ul class="rows pay queue num">${queue.map(c => { const dd = daysBetween(t, fromISO(c.date)); const pt = paidThrough(c.sub); const nAhead = charges(c.sub, addDays(t, 1), addDays(t, 800)).filter(x => x.paid).length; return `<li class="click ${c.overdue ? 'late' : ''}" data-act="edit-sub" data-id="${esc(c.sub.id)}" tabindex="0" role="button"><span class="d">${fmtDay(c.date)}</span><span class="lbl">${esc(c.sub.name)}<span class="meta ${c.overdue ? 'late' : ''}">${dd < 0 ? `${-dd} ${dd === -1 ? 'day' : 'days'} overdue` : dd === 0 ? 'due today' : dd === 1 ? 'due tomorrow' : `due in ${dd} days`}${pt ? `, ${nAhead} paid ahead through ${fmtDay(pt.date)}` : ''}</span></span><span class="amt">${money(c.amount)}${origNote(c.raw, c.cur)}</span><button type="button" class="mini pay" data-act="mark-paid" data-id="${esc(c.sub.id)}" data-date="${c.date}" aria-label="Mark ${esc(c.sub.name)} paid for ${fmtDay(c.date)}">Paid</button></li>`; }).join('')}</ul>` : `<p class="sub-h" style="margin:0">Nothing waiting. Every active subscription is paid.</p>`}
-    </div>
-    <div>
-      <h2>When they bill in ${MONTHS[m]}</h2>
-      ${rh}
-      <p class="rhythm-note">${busiest ? `Your heaviest day is the ${ord(+busiest[0])}: ${busiest[1].length} ${busiest[1].length === 1 ? 'charge' : 'charges'} for ${money(busiest[1].reduce((a,c)=>a+c.amount,0))}. ` : ''}Filled dots are paid, hollow ones are still to pay.</p>
-    </div>
     <div class="two">
       <div>
-        ${aheadList.length ? `<h2>Paid ahead</h2><ul class="rows pay num">${aheadList.slice(0, 14).map(c => `<li class="click" data-act="edit-sub" data-id="${esc(c.sub.id)}" tabindex="0" role="button"><span class="d">${fmtDay(c.date)}</span><span class="lbl">${esc(c.sub.name)}<span class="meta">paid ${fmtDay(c.paidOn)}</span></span><span class="amt">${money(c.amount)}</span><button type="button" class="mini" data-act="unpay" data-id="${esc(c.sub.id)}" data-date="${c.date}">Mark unpaid</button></li>`).join('')}</ul>${aheadList.length > 14 ? `<p class="sub-h">And ${aheadList.length - 14} more.</p>` : ''}` : `<h2>Paid ahead</h2><p class="quiet">Nothing paid ahead yet.</p>`}
+        <h2>Payment queue</h2>
+        ${queue.length ? `<ul class="rows pay queue num">${queue.map(c => { const dd = daysBetween(t, fromISO(c.date)); const pt = paidThrough(c.sub); const nAhead = charges(c.sub, addDays(t, 1), addDays(t, 800)).filter(x => x.paid).length; return `<li class="click ${c.overdue ? 'late' : ''}" data-act="edit-sub" data-id="${esc(c.sub.id)}"><span class="d">${fmtDay(c.date)}</span><button type="button" class="lbl rowbtn" data-act="edit-sub" data-id="${esc(c.sub.id)}">${esc(c.sub.name)}<span class="meta ${c.overdue ? 'late' : ''}">${dd < 0 ? `${-dd} ${dd === -1 ? 'day' : 'days'} overdue` : dd === 0 ? 'due today' : dd === 1 ? 'due tomorrow' : `due in ${dd} days`}${pt ? `, ${nAhead} paid ahead through ${fmtDay(pt.date)}` : ''}</span></button><span class="amt">${money(c.amount)}${origNote(c.raw, c.cur)}</span><button type="button" class="mini pay" data-act="mark-paid" data-id="${esc(c.sub.id)}" data-date="${c.date}" aria-label="Mark ${esc(c.sub.name)} paid for ${fmtDay(c.date)}">Paid</button></li>`; }).join('')}</ul>` : `<p class="sub-h" style="margin:0">Nothing waiting. Every active subscription is paid.</p>`}
       </div>
       <div>
         <h2>Worth a look</h2>
@@ -1312,13 +1492,19 @@ function renderSubs(el) {
         <thead><tr><th>Name</th><th>Price</th><th>Per month</th><th>Paid so far</th><th>Next charge</th><th><span style="position:absolute;width:1px;height:1px;overflow:hidden">Actions</span></th></tr></thead>
         <tbody>${rows}${endedRows}</tbody>
       </table></div>
-    </div>`;
+    </div>
+    <div>
+      <h2>When they bill in ${MONTHS[m]}</h2>
+      ${rh}
+      <p class="rhythm-note">${busiest ? `Your heaviest day is the ${ord(+busiest[0])}: ${busiest[1].length} ${busiest[1].length === 1 ? 'charge' : 'charges'} for ${money(busiest[1].reduce((a,c)=>a+c.amount,0))}. ` : ''}Filled dots are paid, hollow ones are still to pay.</p>
+    </div>
+    ${aheadList.length ? `<div><h2>Paid ahead</h2><ul class="rows pay num">${aheadList.slice(0, 14).map(c => `<li class="click" data-act="edit-sub" data-id="${esc(c.sub.id)}"><span class="d">${fmtDay(c.date)}</span><button type="button" class="lbl rowbtn" data-act="edit-sub" data-id="${esc(c.sub.id)}">${esc(c.sub.name)}<span class="meta">paid ${fmtDay(c.paidOn)}</span></button><span class="amt">${money(c.amount)}</span><button type="button" class="mini" data-act="unpay" data-id="${esc(c.sub.id)}" data-date="${c.date}">Mark unpaid</button></li>`).join('')}</ul>${aheadList.length > 14 ? `<p class="sub-h">And ${aheadList.length - 14} more.</p>` : ''}</div>` : ''}`;
 }
 
 /* --- Calendar view --- */
 function renderCalendar(el) {
   const t = today();
-  const y = S.calMonth.getFullYear(), m = S.calMonth.getMonth(), days = dim(y, m);
+  const y = S.month.getFullYear(), m = S.month.getMonth(), days = dim(y, m);
   const from = new Date(y, m, 1), to = new Date(y, m, days);
   const all = movements(from, to);
   const byDate = {}; for (const x of all) (byDate[x.date] = byDate[x.date] || []).push(x);
@@ -1353,12 +1539,18 @@ function renderCalendar(el) {
     </div>` : `<p class="quiet">Select a day to see its entries.</p>`;
   el.innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap">
-      ${monthNav(S.calMonth, 'cal')}
+      ${monthNav(S.month)}
       <p class="quiet num">${money(monthTotal)} spent${monthSched ? `, ${money(monthSched)} scheduled` : ''}</p>
     </div>
     <div><div class="cal">${head}${html}</div>
     <div class="legend"><span class="key-paid">Paid subscription</span><span class="key-todo">To pay</span><span class="key-late">Overdue</span></div></div>
     ${panel}`;
+  // On phones the day's entries sit below the grid, so bring them into view after picking a day.
+  if (S.scrollDay) {
+    S.scrollDay = false;
+    const p = $('.daypanel');
+    if (p) requestAnimationFrame(() => p.scrollIntoView({block: 'nearest', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'}));
+  }
 }
 
 /* --- Entries view --- */
@@ -1372,11 +1564,11 @@ function renderEntries(el) {
   const months = [...new Set(list.map(x => x.date.slice(0,7)))].sort().reverse();
   if (f.type === 'once') list = list.filter(x => x.kind === 'once');
   if (f.type === 'sub') list = list.filter(x => x.kind === 'sub');
-  if (f.cat) list = list.filter(x => (x.category||'other') === f.cat);
+  if (f.cat) list = list.filter(x => catOf(x.category).id === f.cat);
   if (f.month) list = list.filter(x => x.date.startsWith(f.month));
   if (f.q) { const k = f.q.toLowerCase(); list = list.filter(x => (x.label||'').toLowerCase().includes(k) || (x.note||'').toLowerCase().includes(k) || String(x.raw).includes(k)); }
   const groups = []; let cur = null;
-  for (const x of list.slice(0, 400)) { if (!cur || cur.date !== x.date) { cur = {date:x.date, items:[]}; groups.push(cur); } cur.items.push(x); }
+  for (const x of list.slice(0, f.limit)) { if (!cur || cur.date !== x.date) { cur = {date:x.date, items:[]}; groups.push(cur); } cur.items.push(x); }
   const active = document.activeElement && document.activeElement.id;
   const caret = active === 'e-q' ? document.activeElement.selectionStart : null;
   el.innerHTML = `
@@ -1390,21 +1582,21 @@ function renderEntries(el) {
           <button type="button" data-act="type" data-v="sub" aria-pressed="${f.type==='sub'}">Subscriptions</button>
         </div>
         <label for="e-cat" style="position:absolute;width:1px;height:1px;overflow:hidden">Category</label>
-        <select id="e-cat"><option value="">Every category</option>${CATS.map(c => `<option value="${c.id}" ${f.cat===c.id?'selected':''}>${esc(c.name)}</option>`).join('')}</select>
+        <select id="e-cat"><option value="">Every category</option>${allCats().map(c => `<option value="${c.id}" ${f.cat===c.id?'selected':''}>${esc(c.name)}</option>`).join('')}</select>
         <label for="e-month" style="position:absolute;width:1px;height:1px;overflow:hidden">Month</label>
         <select id="e-month"><option value="">Any month</option>${months.map(k => { const d = fromISO(k + '-01'); return `<option value="${k}" ${f.month===k?'selected':''}>${monthLabel(d)}</option>`; }).join('')}</select>
       </div>
       <div class="summaryline num"><span>${list.length} ${list.length === 1 ? 'entry' : 'entries'}</span><span>${money(sum(list.filter(x=>!x.future)))} spent</span>${list.some(x=>x.future) ? `<span>${money(sum(list.filter(x=>x.future)))} scheduled</span>` : ''}${(f.q||f.cat||f.month||f.type!=='all') ? `<button type="button" class="ghost" id="e-reset">Clear filters</button>` : ''}</div>
       ${groups.length ? groups.map(g => `<div class="daygroup"><h3><span>${fmtLong(g.date)}${g.date > iso(today()) ? ' · scheduled' : ''}</span><span class="num">${money(sum(g.items))}</span></h3><ul class="rows num">${g.items.map(x => { const c = catOf(x.category); const id = x.kind === 'sub' ? x.ref.id : x.id; return `<li class="click ${x.future?'sched':''}" data-act="${x.kind==='sub'?'edit-sub':'edit-once'}" data-id="${esc(id)}" tabindex="0" role="button"><span class="lbl">${esc(x.label)}${x.kind==='sub'?subTag(x):''}<span class="meta">${esc(c.name)}${x.note ? ' · ' + esc(x.note) : ''}</span></span><span class="amt">${money(x.amount)}${origNote(x.raw, x.cur)}</span></li>`; }).join('')}</ul></div>`).join('')
         : (S.expenses.length || S.subs.length ? `<div class="empty" style="margin-top:18px"><strong>No entries match</strong>Try a different search or clear the filters.</div>` : `<div class="empty" style="margin-top:18px"><strong>Nothing logged yet</strong>Use the line at the top to add your first expense.</div>`)}
-      ${list.length > 400 ? `<p class="quiet">Showing the latest 400. Narrow the filters to see older entries.</p>` : ''}
+      ${list.length > f.limit ? `<p class="quiet">Showing the latest ${f.limit} of ${list.length}. <button type="button" class="ghost" data-act="more-entries">Show ${Math.min(PAGE, list.length - f.limit)} more</button></p>` : ''}
     </div>`;
   const qi = $('#e-q');
-  qi.addEventListener('input', () => { S.filter.q = qi.value; render(); });
+  qi.addEventListener('input', () => { Object.assign(S.filter, {q: qi.value, auto: false, limit: PAGE}); render(); });
   if (active === 'e-q') { qi.focus(); try { qi.setSelectionRange(caret, caret); } catch {} }
-  $('#e-cat').addEventListener('change', e => { S.filter.cat = e.target.value; render(); });
-  $('#e-month').addEventListener('change', e => { S.filter.month = e.target.value; render(); });
-  const r = $('#e-reset'); if (r) r.addEventListener('click', () => { S.filter = {q:'', type:'all', cat:'', month:''}; render(); });
+  $('#e-cat').addEventListener('change', e => { Object.assign(S.filter, {cat: e.target.value, auto: false, limit: PAGE}); render(); });
+  $('#e-month').addEventListener('change', e => { Object.assign(S.filter, {month: e.target.value, auto: false, limit: PAGE}); render(); });
+  const r = $('#e-reset'); if (r) r.addEventListener('click', () => { S.filter = freshFilter(); render(); });
 }
 
 let rsz; let lastW = 0; window.addEventListener('resize', () => { clearTimeout(rsz); rsz = setTimeout(() => { const w = chartW(); if (w !== lastW) { lastW = w; if (S.view !== 'entries') render(); } }, 150); });

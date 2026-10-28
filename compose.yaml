@@ -1,0 +1,14 @@
+services:
+  expendial:
+    build: .
+    container_name: expendial
+    restart: unless-stopped
+    # Host networking lets the server use a proxy listening on the host's localhost (PROXY in .env).
+    network_mode: host
+    environment:
+      HOST: 127.0.0.1 # localhost only; use 0.0.0.0 to expose on the network
+      PORT: 8787
+      HTTPS_PROXY: ${PROXY:-}
+      HTTP_PROXY: ${PROXY:-}
+    volumes:
+      - ./data:/app/data
